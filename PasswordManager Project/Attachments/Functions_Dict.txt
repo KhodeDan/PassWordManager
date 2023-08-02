@@ -10,4 +10,5 @@ Not exist In the python library Module's .
 5. isbirthyear() : This function will check If an integer has all the needed option's to be counted As a birthyear. (Can't be less than 1923 , And can't be more than 2022)
 6. isbirthmonth() : This Function will check If an integer Has all the needed option's to be counted as a birthmonth.
 7. isbirthday()   : This Function will check If an integer Has all the needed option's to be counted as a birthday.
+0. ispassword()  : This Function will check if the user entry Is actually A password (It won't limit the user much , Cause they may enter any kind of password.)
 8. ismasterpassword() : This function will check If an inputted Password Has all the needed option's to be counted as masterpassword.
