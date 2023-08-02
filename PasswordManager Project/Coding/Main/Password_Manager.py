@@ -222,6 +222,7 @@ def collect_MasterPassword():
 
                     Users_Info["Users"][Inputted_Username] = {}
                     Users_Info["Users"][Inputted_Username]["MasterPassword"] = Inputted_MasterPassword
+                    Users_Info["Users"][Inputted_Username]["PassWords"] = {}
                     print(F"{Inputted_MasterPassword} Has Been chosen as your MasterPassword")
                     sleep(3)
                     clean()
@@ -376,7 +377,7 @@ def Collect_BirthDate():
                                                 break
 
 
-                                            Birth_Date = F"{Birth_Day} / {Birth_Month} / {Birth_Year}"
+                                            Birth_Date = F"{Birth_Day}/{Birth_Month}/{Birth_Year}"
 
                                             print("Answer with yes or no only.")
                                             Date_Yes_No = input(F"Are You sure You accept This date as birthdate : {Birth_Date} : ")
@@ -458,10 +459,41 @@ def Collect_BirthDate():
 
 # Define a function Named Main Menu , Which Act's as the main menu of the password manager , Containing All the operation's the user can use.
 def Main_Menu():
+    Users_Info = {"Users" : {
+        "KhodeDan" : {
+            "MasterPassword" : "RedWolf1388",
+            "Birth_Date" : "1/1/1980",
+            "PassWords" : {
+
+            }
+        }
+    }}
+    Inputted_Username = "KhodeDan"
     "-------------------------- Needed Variables ------------------------"
     LOOP1 = True     # Define A bool (True) Variable In order to be used as FLAG variable in the looping operation.
     LOOP2 = True     # Define A bool (True) Variable In order to be used as FLAG variable in the looping operation.
-    Desire = None    # Define a NoneType Value Variable in Order to be used as the User Input storing Variable , In order to understand what operation they want to use.
+    LOOP3 = True     # Define A bool (True) Variable In order to be used as FLAG variable in the looping operation.
+    LOOP4 = True     # Define A bool (True) Variable In order to ube used as FLAG variable in the looping operation.
+    LOOP5 = True     # Define A bool (True) Variable In order to be used as FLAG variable in the looping operation.
+    LOOP6 = True     # Define a variable with the bool (True) Value which will be used as the FLAG variable for the looping Operation.
+    LOOP7 = True     # Define a variable with the bool (True) Value which will be used as the FLAG variable for the looping Operation.
+    LOOP8 = True     # Define a variable with the bool (True) Value which will be used as the FLAG variable for the looping Operation.
+    LOOP9 = True     # Define A bool (True) Variable In order to be used as FLAG varibale in the forgot Password Operation Looping.
+    ForgotOperation_NewMasterPassword_inbox = ""     # Define A variable with the value of str ("") In order to be used as the NewMasterPassword Input in the forgot Password Operation
+    ForgotOperation_BirthDate = ""   # Define A variable with the value of str ("") In order to be used in creating the new BirthDate in the forgot MasterPassword Operation.
+    Birth_Day_Inbox = ""     # Define A str ("") Variable In order to be used as BirthDay Input identifier In the forgot MasterPassword Operation.
+    Birth_Month_Inbox = ""   # Define A str ("") Variable In order to be used as BirthMonth Input Identifier In the forgot MasterPassword Operation.
+    Birth_Year_Inbox = ""    # Define A str("") Variable in order to be used as BirthYear Input Identifier In the forgot MasterPassword Operation.
+    Current_MasterPassword = Users_Info["Users"][Inputted_Username]["MasterPassword"]    # Define a variable with the value of The user Current MasterPassword (Titled) , In order to be used in the MasterPassword Concerned Operation's.
+    User_Desired_Operation = ""    # Define A str ("") Value Variable in Order to be used as the User Input storing Variable , In order to understand what operation they want to use.\
+    MasterPassword_Inbox = ""    # Define A str ("") Value variable In order to use as an input , In the changing MasterPassword Operation.
+    New_MasterPassword_Inbox = ""    # Define A str ("") Value Variable In order to use as an input , In the changing MasterPassword Operation.
+    PassWord_Title = ""  # Define A str ("") Value variable , In order to keep the name of the password.
+    Desired_PassWord = ""    # Define A str ("") Value variable in Order to store the password that the user want's to add in the Add_Password.\
+    Want_To_Remove = ""     # Define A str("") Value Variable in Order to store the password that Is going to be deleted.
+    PassWords = "PassWords"  # Define A str ("PassWords") Value variable in Order to use in A F string print (In order to avoid quotation mark.)
+    Number = 1   # Define A int (1) Value variable In order to use as numbering in the loop.
+    Passwords_Lenght = len(Users_Info["Users"][Inputted_Username]["PassWords"])  # Define A variable that will keep the lenght of password's as value (How Much password's the user have.)
     "--------------------------------------------------------------------"
 
 
@@ -478,6 +510,7 @@ def Main_Menu():
 
         
         print("Here Are all the operation's You can use (Insert the Number of Operation In order to use): ")
+        
 
         # Start a for loop that iterate Over all Operation's In the operation Dictionary and they're key Number , In order to print them one by one.
         for Operation_Number , Operation in Operations.items():
@@ -485,22 +518,662 @@ def Main_Menu():
 
             print(F"{Operation_Number} . {Operation} ")
 
-        try:
-            Desire = int(input("What Operation Would you like to choose?(Operation Number) : "))
+
+
+        User_Desired_Operation = input("What Operation Would you like to choose?(Operation Number) : ")
+
+
+        if User_Desired_Operation.isdigit():
+
+
+            User_Desired_Operation = int(User_Desired_Operation)
+            
+
+        else:
+
+
+            clean()
+
+
+            print("That Is not a known Operation Code name.")
+            print("Please try again.")
+
+
+            sleep(3)
         
 
-        except:
+        # VIEW PASSWORD.
+        if User_Desired_Operation in [Number for Number in Operations.keys() if Number == 1]:
+    
+    
+            if len(Users_Info["Users"][Inputted_Username]["PassWords"]) == 0:
+    
+    
+                clean()
+    
+    
+                print(F"You currently Have no Password's stored . You can store password's in the password adding menu.")
+                print("Returning to the main menu")
+    
+    
+                sleep(5)
+    
+    
+                continue
+    
+    
+            else:
+    
+    
+                clean()
+                    
+    
+                print("Here Are all the Password's You've stored : ")
+                print("")
 
-            continue
+
+                Number = 1
+
+
+                for PassWord,Title in Users_Info["Users"][Inputted_Username]["PassWords"].items():
+                            
+                        
+                    print(F"{Number} . {PassWord} : {Title}")
+                    print('')
+
+
+                    Number = Number + 1
+
+
+                print("")
+                input("Press any key to return to the main menu.")
+    
+    
+        # ADD PASSWORD.
+        if User_Desired_Operation in [Number for Number in Operations.keys() if Number == 2]:
+    
+    
+            LOOP2 = True
+    
+    
+            while LOOP2 == True:
+                        
+    
+                clean()
+    
+    
+                if LOOP2 == False:
+                    break
+    
+    
+                Desired_PassWord = str(input("Please enter the Password you would like to add : "))
+
+                clean()
+
+
+                PassWord_Title = str(input("Now Please enter the title you want to specify the password : "))
+
+
+                clean()
+
+
+                # This If statement will check ( If the Entered password Is not an empty string and if the entered Password Allready Don't exist in the User passwords )
+                if ispassword(Desired_PassWord) and Desired_PassWord not in Users_Info["Users"][Inputted_Username][PassWords]:
+    
+    
+                    Users_Info["Users"][Inputted_Username]["PassWords"][Desired_PassWord] = PassWord_Title
+    
+    
+                    print(F" {Desired_PassWord} Has been added to your password's list as {PassWord_Title}")
+                    print("Diverting to the main menu.")
+    
+    
+                    sleep(5)
+
+
+                    LOOP2 = False
+
+        
+                # And if the password Allready exist In the password's dictionary , The User will be notified.
+                else:
+    
+    
+                    clean()
+    
+    
+                    print("That Password Allready exist's in Your password's list.")
+                    print("Please try again.")
+    
+    
+                    sleep(3)
+    
+    
+                    continue  
+        
+
+        # REMOVE-DELETE PASSWORD.
+        if User_Desired_Operation in [Number for Number in Operations.keys() if Number == 3]:
+
+
+            LOOP3 = True
+
+
+            while LOOP3:
+
+
+                if LOOP3 == False:
+                    break
+
+
+                clean()
+
+
+                if len(Users_Info["Users"][Inputted_Username][PassWords]) == 0:
+
+
+                    print("You currently Have no Password Stored , You can add password's using the Add Password Option In the menu.")
+                    print("Diverting Back to the menu...")
+
+                
+                else:
+
+
+                    Number = 1
+
+
+                    for PassWord,PassWord_Title in Users_Info["Users"][Inputted_Username][PassWords].items():
+
+
+                        print(F"{Number} . {PassWord} : {PassWord_Title}")
+                        print("")
+
+
+                        Number = Number + 1
+
+                    print("Write the PassWord name only.")
+                    Want_To_Remove = input("Which One of theese Password's Would you like to delete? : ")
+
+
+                    if Want_To_Remove == PassWord in Users_Info["Users"][Inputted_Username][PassWords].keys():
+
+
+                        deleted_PassWord = Users_Info["Users"][Inputted_Username][PassWords].pop(Want_To_Remove)
+
+
+                        clean()
+
+
+                        try:
+
+
+                            print(F"{deleted_PassWord} has been deleted.")
+
+
+                            del deleted_PassWord
+
+
+                        except:
+
+
+                            clean()
+                            
+
+                            print("The Inserted Password does not exist , Please try again.")
+
+
+                            continue
+
+
+                        sleep(3)
+
+
+                        LOOP3 = False ; break
+                    
+
+        # CHANGE MASTERPASSWORD
+        if User_Desired_Operation in [Number for Number in Operations.keys() if Number == 4]:
+
+
+            LOOP4 = True
+
+
+            while LOOP4 == True:
+
+
+                if LOOP4 == False:
+                    break
+
+
+                clean()
+
+
+                print("Change MasterPassWord Menu :")
+                print("")
+                print("1. Remember You can Insert quit For returning to the main menu If you changed your mind.")
+
+
+                MasterPassword_Inbox = input("Please enter your Current MasterPassword to Resume : ")
+                MasterPassword_Inbox = MasterPassword_Inbox.strip()
+
+
+                if MasterPassword_Inbox == Current_MasterPassword:
+
+
+                    clean()
+
+                    
+                    print("Access granted.")
+
+                    
+                    sleep(3)
+
+                    
+                    LOOP4 = False
+
+
+                    LOOP5 = True
+
+
+                    while LOOP5 == True:
+
+
+                        clean()
+
+                        print("Remember that If you changed your mind , You can type in quit for returning to the main menu")
+                        print("The Inserted MasterPassword Must Contain At least 1 UpperCase , LowerCase Letter , And A Number.")
+                        print("")
+                        New_MasterPassword_Inbox = input("Please type In your new MasterPassword : ")
+                        New_MasterPassword_Inbox.strip()
+
+
+                        if ismasterpassword(New_MasterPassword_Inbox):
+
+
+                            try:
+
+                                Users_Info["Users"][Inputted_Username]["MasterPassword"] = New_MasterPassword_Inbox
+
+
+                                # Change the current password variable In order to avoid Upcoming Error's everytime the operation Rerun's.
+                                Current_MasterPassword = Users_Info["Users"][Inputted_Username]["MasterPassword"]
+
+
+                                clean()
+
+
+                                print(F"{New_MasterPassword_Inbox} Has been set as your MasterPassword.")
+
+
+                                sleep(2)
+
+
+                                print("Diverting to the main menu...")
+
+
+                                sleep(3)
+
+
+                                LOOP5 = False
+
+
+                            except:
+
+
+                                print("The Operation was unsuccesfull , Please try again Later.")
+
+
+                                LOOP5 = False
+                        
+
+                        # Checks if the user Typed in any form of the word "QUIT"
+                        elif New_MasterPassword_Inbox in QUIT_LETTERCASE:
+
+
+                            clean()
+
+
+                            sleep(1)
+
+
+                            print("Returning to the main menu...")
+
+
+                            sleep(3)
+
+
+                            LOOP5 = False
+
+                        
+
+                        else:
+
+
+                            clean()
+
+
+                            print("The entry Cannot be accepted as A MasterPassword , Please try again.")
+
+
+                            sleep(3)
+
+
+                            continue
+
+
+
+                elif MasterPassword_Inbox in QUIT_LETTERCASE:
+
+
+                    clean()
+
+
+                    print("The Operation Has been Cancelled.")
+
+
+                    sleep(2)
+
+
+                    print("Diverting to the main menu...")
+
+
+                    sleep(3)
+
+
+                    break
+
+
+                else:
+
+
+                    clean()
+                    sleep(2)
+
+
+                    print("Access Denied.")
+
+
+                    sleep(2)
+
+
+                    continue
+
+        
+        # FORGOT MasterPassword.
+        if User_Desired_Operation in [Number for Number in Operations.keys() if Number == 5]:
+
+
+            LOOP6 = True
+            
+
+            while LOOP6 == True:
+
+
+                clean()
+
+                
+                print("Remember You can type in QUIT Anytime you have changed your mind.")
+
+
+                print("Right Now , There Is only one solution for the Password Recovery Operation.")
+
+
+                sleep(2)
+
+
+                print("")
+
+
+
+
+
+                Birth_Day_Inbox = input("Please Type In your Birth Day (1 TO 31) : ")
+
+
+                if Birth_Day_Inbox in QUIT_LETTERCASE:
+
+
+                    break
+
+
+                if Birth_Day_Inbox.isdigit():
+
+
+                    Birth_Day_Inbox = int(Birth_Day_Inbox)
+
+                
+
+                else:
+
+
+                    clean()
+
+
+                    print("The entry Is not a number , Please try again.")
+
+
+                    sleep(2)
+
+
+                    continue
+
+
+                if isbirthday(Birth_Day_Inbox):
+
+
+                    LOOP7 = True
+
+
+                    while LOOP7 == True:
+
+
+                        clean()
+
+
+                        
+
+
+                        print("Remember You can type in QUIT , for returning to the main menu.")
+
+
+                        Birth_Month_Inbox = input("Now Please Type in the month you were born (1 to 12) :  ")
+
+
+                        if Birth_Month_Inbox in QUIT_LETTERCASE:
+
+
+                            LOOP7 = False
+                            LOOP6 = False
+                            
+
+                        elif Birth_Month_Inbox.isdigit():
+
+
+                            Birth_Month_Inbox = int(Birth_Month_Inbox)
+
+
+                            if isbirthmonth(Birth_Month_Inbox):
+
+
+                                LOOP8 = True
+
+
+                                while LOOP8 == True:
+
+
+                                    clean()
+
+                                        
+                                    Birth_Year_Inbox = input("At Last , Please type in the year you were born (1923 , 2022) : ")
+
+
+                                    if Birth_Year_Inbox in QUIT_LETTERCASE:
+
+
+                                        LOOP6 = False
+                                        LOOP7 = False
+                                        LOOP8 = False
+
+
+                                        break
+
+
+                                    if Birth_Year_Inbox.isdigit():
+
+
+                                        Birth_Year_Inbox = int(Birth_Year_Inbox)
+
+                                            
+                                        if isbirthyear(Birth_Year_Inbox):
+
+
+                                            ForgotOperation_BirthDate = F"{Birth_Day_Inbox}/{Birth_Month_Inbox}/{Birth_Year_Inbox}"
+
+
+                                            if ForgotOperation_BirthDate == Users_Info["Users"][Inputted_Username]["Birth_Date"]:
+
+
+                                                LOOP9 = True
+
+
+                                                while LOOP9 == True:
+
+
+                                                    clean()
+
+
+                                                    print("Now , You should enter the new MasterPassword you would like.")
+                                                    print("")
+                                                    print("MasterPassword Must have at least 1 Upper case and lowerCase letter , 1 Number , Shouldn't be less than 5 characters.")
+
+
+                                                    ForgotOperation_NewMasterPassword_inbox = input("Please enter the new MasterPassword : ")
+                                                    ForgotOperation_NewMasterPassword_inbox = ForgotOperation_NewMasterPassword_inbox.strip()
+
+
+                                                    if ismasterpassword(ForgotOperation_NewMasterPassword_inbox):
+
+
+                                                        ForgotOperation_NewMasterPassword_inbox = Users_Info["Users"][Inputted_Username]["MasterPassword"] 
+
+
+                                                        print(F"{ForgotOperation_NewMasterPassword_inbox} Has been chosen as your new MasterPassword.")
+
+
+                                                        sleep(4)
+
+
+                                                        LOOP9 = False
+                                                        LOOP8 = False
+                                                        LOOP7 = False
+                                                        LOOP6 = False
+                                                    
+
+                                                    else:
+
+
+                                                        clean()
+
+
+                                                        print("Remember that the MasterPassword should have at least 1 uppercae letter , 1 LowerCase letter , And 1 number.")
+
+
+                                                        print("That Is not a MasterPassword , Please try again.")
+
+
+                                                        sleep(4)
+
+                                            else:
+
+
+                                                clean()
+
+
+                                                print("Access denied , Returning to the menu.")
+
+
+                                                LOOP6 = False
+                                                LOOP7 = False
+                                                LOOP8 = False
+
+
+
+                                            
+
+
+
+
+                                            
+                                        else:
+
+
+                                            clean()
+
+
+                                            print("The Inserted Content is not a BirthYear , Please try again.")
+
+
+                                            sleep(4)
+
+                                    
+                                    else:
+
+                                        clean()
+
+
+                                        print("The inserted content Is not a Number , Please try again.")
+
+
+                                        sleep(4)
+                                        
+                                
+                            else:
+
+
+                                clean()
+
+
+                                print("The entry Is not a birthmonth , Please try again.")
+
+
+                                sleep(4)
+
+
+                        else:
+
+
+                            clean()
+
+
+                            print("The entry Is not a Number , Please try again.")
+
+
+                            sleep(4)
+                        
+
+                else:
+
+
+                    clean()
+
+
+                    print(" The Inserted Number Is not a BirthDay , Please try again.")
+
+
+                    sleep(4)
+
+        
+
+            else:
+
+
+                clean()
+
+
+                print("That Is not a Operation Code")
+
+
+"--------------------------- Main Menu Function (End) -------------------"
+
 
 
 Main_Menu()
-
-
-        
-
-
-
-
-
-

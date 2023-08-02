@@ -17,14 +17,19 @@ import os
 "__________________ Needed Variables ________________"
 
 
-version = 'Beta 1.1.0'     # The current version of KhodeDan's Password Manager App. *(Semantic Numbering.)
+version = 'Beta 1.1.0 '     # The current version of KhodeDan's Password Manager App. *(Semantic Numbering.)
 
 # Define a empty dictionary , Which Later Is going to contain Username's , Masterpassword's , Password's.
 Users_Info = {}
 
 
 # A dictionary of all the avaliable Operation's that can be used in the main menu , All assigned with a number.
-Operations = {1 : "Add_Password" , 2 : "Remove_Password" , 3 : "Change_MasterPassword" , 4 : "Forgot_MasterPassword" , 5 : "Quit"}
+Operations = {  1 : "Viewing Passwords"
+              , 2 : "Adding Password" 
+              , 3 : "Removing Password" 
+              , 4 : "Changing MasterPassword"
+              , 5 : "ForGot MasterPassword"
+              , 6 : "Quit"}
 
 
 # Define all the letter's possible to write In a password , Uppercase and Lowercase letter's and number's for further use.
@@ -32,6 +37,22 @@ allowed = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N",
 UpperCase_Letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ,]
 LowerCase_Letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 Numbers = ["1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" , "9" , "0"]
+
+
+# All Case situation's of the word Quit , In order to be used in the quitting situation's
+QUIT_LETTERCASE = ["QUIT",
+"Quit",
+"quit",
+"QuIt",
+"quIT",
+"QUit",
+"qUIT",
+"qUIt",
+"QuIt",
+"QuiT",
+"QuIt",
+"qUIT",
+"QUIT",]
 
 
 "_____________________________ Clearing Function _______________________________"
@@ -267,5 +288,34 @@ def ismasterpassword(MasterPassword : str):
 
     
 "___________________________ MasterPassword Checking Function ___________________"
+
+
+"___________________________ Password Checking Function __________________________"
+
+
+# Define a function called ispassword , Which will check if the user entry Is a real Password , In this Case , There Isn't much prohibited Case's , Because user may enter different type of Password's (Digit , ETC)
+def ispassword(password):
+    "------------------ Needed Variables --------------------"
+    Password_Firstlimi = 1   # Define a variable with the value of int 1 , Which will act as the limitation for the user entry lengh.
+    Password_Lastlimit = 30  # Define a variable with the value of int 50 , Which will act as the limitation for the user entry lengh.
+    Password_Lengh = len(password)   # Define a variable which will keep the lengh of the entered password , As value.
+    "--------------------------------------------------------"
+
+
+    if Password_Lengh > Password_Lastlimit:
+        return False
+    
+
+    if Password_Lengh < Password_Firstlimi:
+        return False
+    
+
+    return True
+
+
+"____________________________ Password checking function ________________________"
+
+
+
 
 
