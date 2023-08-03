@@ -419,21 +419,9 @@ def Collect_BirthDate():
                                     continue
 
 
-
-
-
-
-                        
-
-                
                 else:
                     print("That Is not a a birthday. Please try again.")
                     input("Press any key to retry.")
-
-
-
-            
-
 
 
         elif BirthDate_Add_Pass == "no":
@@ -460,14 +448,40 @@ def Collect_BirthDate():
 # Define a function Named Main Menu , Which Act's as the main menu of the password manager , Containing All the operation's the user can use.
 def Main_Menu():
     Users_Info = {"Users" : {
-        "KhodeDan" : {
-            "MasterPassword" : "RedWolf1388",
-            "Birth_Date" : "1/1/1980",
-            "PassWords" : {
 
-            }
-        }
-    }}
+
+        "KhodeDan" : {
+
+
+
+            "MasterPassword" : "RedWolf1388",
+
+
+
+            "PassWords" : {}, 
+
+
+
+            "Birth_Date" : "1/1/1980" ,
+
+
+
+            },
+
+
+            "Eminem" : {
+                
+
+                "MasterPassword" : "Hello-World"
+            },
+
+
+        }, 
+
+
+    }
+
+
     Inputted_Username = "KhodeDan"
     "-------------------------- Needed Variables ------------------------"
     LOOP1 = True     # Define A bool (True) Variable In order to be used as FLAG variable in the looping operation.
@@ -475,12 +489,18 @@ def Main_Menu():
     LOOP3 = True     # Define A bool (True) Variable In order to be used as FLAG variable in the looping operation.
     LOOP4 = True     # Define A bool (True) Variable In order to ube used as FLAG variable in the looping operation.
     LOOP5 = True     # Define A bool (True) Variable In order to be used as FLAG variable in the looping operation.
-    LOOP6 = True     # Define a variable with the bool (True) Value which will be used as the FLAG variable for the looping Operation.
-    LOOP7 = True     # Define a variable with the bool (True) Value which will be used as the FLAG variable for the looping Operation.
-    LOOP8 = True     # Define a variable with the bool (True) Value which will be used as the FLAG variable for the looping Operation.
+    LOOP6 = True     # Define A variable with the bool (True) Value which will be used as the FLAG variable for the looping Operation.
+    LOOP7 = True     # Define A variable with the bool (True) Value which will be used as the FLAG variable for the looping Operation.
+    LOOP8 = True     # Define A variable with the bool (True) Value which will be used as the FLAG variable for the looping Operation.
     LOOP9 = True     # Define A bool (True) Variable In order to be used as FLAG varibale in the forgot Password Operation Looping.
+    LOOP10 = True    # Define A bool (True) Variable In order to use in the Change User Operation.
+    LOOP11 = True    # Define A bool (True) Variable In order to use in the Change User Operation.
+    users_count = len(Users_Info["Users"])   # Define a variable Which keeps the lenght of the Users count as variable.
+    changeuser_MasterPassword_Inbox = ""     # Define a variable with the value of str ("") In order to be used as MasterPassword Input in change user Operation.
+    changeuser_username_Inbox = ""   # Define A variable with the value of str ("") In order to be used as UserName input in the change user operation.
     ForgotOperation_NewMasterPassword_inbox = ""     # Define A variable with the value of str ("") In order to be used as the NewMasterPassword Input in the forgot Password Operation
     ForgotOperation_BirthDate = ""   # Define A variable with the value of str ("") In order to be used in creating the new BirthDate in the forgot MasterPassword Operation.
+    BirthDate_Check = ""  # Define A variable with the value of str ("") In order to be used to check If the user have a existing Birth_Date in their Info or not To be used in the forgot MasterPassword Operation
     Birth_Day_Inbox = ""     # Define A str ("") Variable In order to be used as BirthDay Input identifier In the forgot MasterPassword Operation.
     Birth_Month_Inbox = ""   # Define A str ("") Variable In order to be used as BirthMonth Input Identifier In the forgot MasterPassword Operation.
     Birth_Year_Inbox = ""    # Define A str("") Variable in order to be used as BirthYear Input Identifier In the forgot MasterPassword Operation.
@@ -493,7 +513,6 @@ def Main_Menu():
     Want_To_Remove = ""     # Define A str("") Value Variable in Order to store the password that Is going to be deleted.
     PassWords = "PassWords"  # Define A str ("PassWords") Value variable in Order to use in A F string print (In order to avoid quotation mark.)
     Number = 1   # Define A int (1) Value variable In order to use as numbering in the loop.
-    Passwords_Lenght = len(Users_Info["Users"][Inputted_Username]["PassWords"])  # Define A variable that will keep the lenght of password's as value (How Much password's the user have.)
     "--------------------------------------------------------------------"
 
 
@@ -509,7 +528,7 @@ def Main_Menu():
             break
 
         
-        print("Here Are all the operation's You can use (Insert the Number of Operation In order to use): ")
+        print("\33[34m\33[40m Here Are all the operation's You can use (Insert the Number of Operation In order to use): ")
         
 
         # Start a for loop that iterate Over all Operation's In the operation Dictionary and they're key Number , In order to print them one by one.
@@ -517,7 +536,25 @@ def Main_Menu():
 
 
             print(F"{Operation_Number} . {Operation} ")
+        
 
+
+        print("")
+
+
+        print("\33[31m---------------------- User Management -----------------------------")
+
+
+        print("")
+
+
+        for user_operation_number , user_management_operation in user_management_operations.items():
+
+
+            print(F"\33[34m{user_operation_number} . {user_management_operation}")
+        
+
+        print("")
 
 
         User_Desired_Operation = input("What Operation Would you like to choose?(Operation Number) : ")
@@ -674,6 +711,15 @@ def Main_Menu():
                     print("You currently Have no Password Stored , You can add password's using the Add Password Option In the menu.")
                     print("Diverting Back to the menu...")
 
+
+                    sleep(4)
+
+
+                    clean()
+
+
+                    LOOP3 = False
+
                 
                 else:
 
@@ -732,9 +778,6 @@ def Main_Menu():
 
         # CHANGE MASTERPASSWORD
         if User_Desired_Operation in [Number for Number in Operations.keys() if Number == 4]:
-
-
-            LOOP4 = True
 
 
             while LOOP4 == True:
@@ -902,9 +945,39 @@ def Main_Menu():
         if User_Desired_Operation in [Number for Number in Operations.keys() if Number == 5]:
 
 
-            LOOP6 = True
+            BirthDate_Check = Users_Info["Users"][Inputted_Username].get("Birth_Date" , False)
+
+
+            if BirthDate_Check == "Birth_Date":
+
+
+                LOOP6 = True
             
 
+            else:
+
+
+                clean()
+
+                
+                sleep(1)
+
+
+                print("")
+
+
+                print("You Have not added Your birthday to your account , You can't recover your MasterPassword .")
+
+
+                sleep(5)
+
+
+                LOOP6 = False
+
+
+                continue
+
+            
             while LOOP6 == True:
 
 
@@ -1082,6 +1155,7 @@ def Main_Menu():
 
                                                         sleep(4)
 
+
                                             else:
 
 
@@ -1096,13 +1170,6 @@ def Main_Menu():
                                                 LOOP8 = False
 
 
-
-                                            
-
-
-
-
-                                            
                                         else:
 
 
@@ -1160,20 +1227,187 @@ def Main_Menu():
 
 
                     sleep(4)
-
         
 
-            else:
+        # CHANGE USER.
+        if User_Desired_Operation in [Number for Number in user_management_operations.keys() if Number == 7]:
+
+
+            if users_count == 1:
 
 
                 clean()
 
+                
+                print("You Have no other account's , You can add Other Account's using add user button in the menu.")
 
-                print("That Is not a Operation Code")
+                
+                clean()
+
+
+                continue
+
+
+            else:
+
+
+                LOOP10 = True
+
+
+                while LOOP10 == True:
+
+
+                    clean()
+
+
+                    print("\33[31mHere are all the avaliable accounts : \33[34m")
+
+
+                    print("")
+
+
+                    for user in Users_Info["Users"]:
+
+
+                        print(F"⁛  {user} ⁛")
+                        
+
+                        print("")
+
+                    
+                    sleep(1)
+
+
+                    print("Remember you can type in \33[31mquit\33[34m for returning to the main menu , Anytime you desire.")
+
+
+                    changeuser_username_Inbox = input("Which one of the \33[31maccount's\33[34m would you like to Login ? (\33[31mAccount Name\33[34m): \33[0m")
+                    changeuser_username_Inbox = changeuser_username_Inbox.strip()
+
+
+                    if changeuser_username_Inbox in [user for user in Users_Info["Users"] if changeuser_username_Inbox == user] and changeuser_username_Inbox != Inputted_Username:
+
+
+                        clean()
+
+
+                        LOOP11 = True
+
+
+                        while LOOP11 == True:
+
+
+                            clean()
+
+
+                            changeuser_MasterPassword_Inbox = input(F"\33[34mPlease enter the \33[31m MasterPassword\33[34m For the account \33[31m{changeuser_username_Inbox}\33[0m : ")
+                            changeuser_MasterPassword_Inbox = changeuser_MasterPassword_Inbox.strip()
+
+
+                            if changeuser_MasterPassword_Inbox == Users_Info["Users"][changeuser_username_Inbox]["MasterPassword"]:
+
+
+                                clean()
+
+
+                                print(F"\33[34m Successfully Logged Into account \33[31m{changeuser_username_Inbox}\33[34m")
+
+
+                                Inputted_Username == changeuser_username_Inbox
+
+
+                                sleep(5)
+
+
+                                LOOP10 = False
+                                LOOP11 = False
+                            
+
+                            elif changeuser_MasterPassword_Inbox in [quit_type for quit_type in QUIT_LETTERCASE if changeuser_MasterPassword_Inbox == quit_type]:
+
+
+                                clean()
+
+
+                                print("Quitting to the main menu.")
+
+
+                                LOOP10 = False
+                                LOOP11 = False
+                            
+
+                            else:
+
+
+                                clean()
+
+
+                                print("\33[31mAccess denied.\33[34m")
+
+
+                                sleep(3)
+
+
+                                LOOP11 = False
+
+
+                    elif changeuser_username_Inbox in [quit_type for quit_type in QUIT_LETTERCASE if changeuser_username_Inbox == quit_type]:
+
+
+                        clean()
+
+
+                        print("Quiting to the main menu.")
+
+
+                        sleep(2)
+
+
+                        LOOP10 = False
+                    
+
+                    elif changeuser_username_Inbox == Inputted_Username:
+
+
+                        clean()
+
+
+                        print(F"\33[31mYou are allready Logged Into account \33[31m{changeuser_username_Inbox} \33[34m")
+
+                        
+                        sleep(4)
+
+
+                        clean()
+                    
+
+                    else:
+
+
+                        clean()
+
+
+                        print("\33[31mThat Account UserName does not exist , try again.\33[34m")
+
+
+                        print("")
+
+
+                        print("Please note that All account usernames are \33[31m cAsE sEnSiTiVe\33[34m")
+
+
+                        sleep(5)
+
+
+        # Quitting Operation.
+        elif User_Desired_Operation in [Number for Number in Operations.keys() if Number == 6]:
+
+
+            # One of the database Defined Function's , Which will terminate the program In a ordinary way , With a comfy GoodBye Message!
+            termination()
 
 
 "--------------------------- Main Menu Function (End) -------------------"
-
 
 
 Main_Menu()
