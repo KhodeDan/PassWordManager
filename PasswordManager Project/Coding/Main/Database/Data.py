@@ -11,13 +11,18 @@ from time import sleep
 import os
 
 
+# Import the sys module , In order to use in the exiting Operation.
+import sys
+
+
 "______________________________________________________"
 
 
 "__________________ Needed Variables ________________"
 
 
-version = 'Beta 1.1.0 '     # The current version of KhodeDan's Password Manager App. *(Semantic Numbering.)
+version = 'Beta 1.2.5'     # The current version of KhodeDan's Password Manager App. *(Semantic Numbering.)
+
 
 # Define a empty dictionary , Which Later Is going to contain Username's , Masterpassword's , Password's.
 Users_Info = {}
@@ -32,6 +37,13 @@ Operations = {  1 : "Viewing Passwords"
               , 6 : "Quit"}
 
 
+user_management_operations = {
+      7 : "Change User"
+    , 8 : "Add User" 
+    , 9 : "Remove User"
+}
+
+
 # Define all the letter's possible to write In a password , Uppercase and Lowercase letter's and number's for further use.
 allowed = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" ,"0" , "1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" , "9" , ]
 UpperCase_Letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ,]
@@ -40,19 +52,29 @@ Numbers = ["1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" , "9" , "0"]
 
 
 # All Case situation's of the word Quit , In order to be used in the quitting situation's
-QUIT_LETTERCASE = ["QUIT",
-"Quit",
-"quit",
-"QuIt",
-"quIT",
-"QUit",
-"qUIT",
-"qUIt",
-"QuIt",
-"QuiT",
-"QuIt",
-"qUIT",
-"QUIT",]
+QUIT_LETTERCASE = [
+    "QUIT",
+    "Quit",
+    "quit",
+    "QuIt",
+    "quIT",
+    "QUit",
+    "qUIT",
+    "qUIt",
+    "QuIt",
+    "QuiT",
+    "QuIt",
+    "qUIT",
+    "QUIT",
+    "qUiT",
+    "quIt",
+    "QUiT",
+    "QUiT",
+    "QuIt",
+    "QUiT",
+    "quiT",
+    "quIt"
+]
 
 
 "_____________________________ Clearing Function _______________________________"
@@ -98,6 +120,40 @@ def loading():
 
 
 "__________________________________________________________________________"
+
+
+"_____________________________ Termination (Exiting) Operation __________________________"
+
+
+# Define a function called termination , Which Have the part of cleaning , Exiting The program In an ordinary way .
+def termination():
+
+
+            clean()
+
+
+            print("Thanks for Using KhodeDan's Password Manager.")
+
+
+            sleep(4)
+
+
+            clean()
+
+
+            print("\33[1;31;40mQuitting.... \33[0m")
+
+
+            sleep(3)
+
+
+            clean()
+
+
+            sys.exit()   # This syntax used with sys module , Will tell the python interpreter to terminate the project.
+
+
+"_______________________________ Termination (Exiting) Operation ___________________________"
 
 
 "_________________________ UserName Checking Function______________________"
@@ -314,8 +370,4 @@ def ispassword(password):
 
 
 "____________________________ Password checking function ________________________"
-
-
-
-
 
