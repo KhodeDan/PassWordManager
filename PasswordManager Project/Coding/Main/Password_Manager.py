@@ -77,7 +77,7 @@ def Collect_UserName():
 
 
         
-        if isusername(Inputted_Username):
+        if isusername(Inputted_Username) and Inputted_Username not in Users_Info["Users"].keys():
 
             sleep(1)
             clean()
@@ -102,7 +102,7 @@ def Collect_UserName():
                     clean()
 
 
-                    Users_Info["Users"] = {Inputted_Username : {}}
+                    Users_Info["Users"][Inputted_Username] = {}
 
 
                     print(F"{Inputted_Username} Has been chosen as your username.")
@@ -129,6 +129,21 @@ def Collect_UserName():
                     clean()
                     print("That Is not a yes or no , Please try again.")
                     sleep(3)
+        
+
+        elif Inputted_Username in Users_Info["Users"].keys():
+
+
+            clean()
+
+
+            print("This \33[31m UserName \33[34m Allready Exist's , Please try another UserName")
+
+
+            input("Press any key to continue.")
+
+
+            continue
 
 
         else:
@@ -193,7 +208,7 @@ def collect_MasterPassword():
 
         print("The MasterPassword at least Must have 1 Upper Case letter , 1 LowerCase Lettter , And at least A number.")
         Inputted_MasterPassword = input(F"Please Chose a MasterPassword for the account {Inputted_Username} : ")
-        Inputted_MasterPassword.strip()  # Delete all spaces from the user inputted masterpassword.
+        Inputted_MasterPassword = Inputted_MasterPassword.strip()  # Delete all spaces from the user inputted masterpassword.
 
 
         if ismasterpassword(Inputted_MasterPassword):
@@ -447,42 +462,6 @@ def Collect_BirthDate():
 
 # Define a function Named Main Menu , Which Act's as the main menu of the password manager , Containing All the operation's the user can use.
 def Main_Menu():
-    Users_Info = {"Users" : {
-
-
-        "KhodeDan" : {
-
-
-
-            "MasterPassword" : "RedWolf1388",
-
-
-
-            "PassWords" : {}, 
-
-
-
-            "Birth_Date" : "1/1/1980" ,
-
-
-
-            },
-
-
-            "Eminem" : {
-                
-
-                "MasterPassword" : "Hello-World"
-            },
-
-
-        }, 
-
-
-    }
-
-
-    Inputted_Username = "KhodeDan"
     "-------------------------- Needed Variables ------------------------"
     LOOP1 = True     # Define A bool (True) Variable In order to be used as FLAG variable in the looping operation.
     LOOP2 = True     # Define A bool (True) Variable In order to be used as FLAG variable in the looping operation.
@@ -495,9 +474,10 @@ def Main_Menu():
     LOOP9 = True     # Define A bool (True) Variable In order to be used as FLAG varibale in the forgot Password Operation Looping.
     LOOP10 = True    # Define A bool (True) Variable In order to use in the Change User Operation.
     LOOP11 = True    # Define A bool (True) Variable In order to use in the Change User Operation.
+    LOOP12 = True    # Define A bool (True) Variable In order to use in the Add user Operation.
+    adduser_operation_assurance = ""     # Define A variable with the value of str ("") In order to be used as user Input in the adding user operation , Asking the user if they are sure about Addind A New account or not.
     users_count = len(Users_Info["Users"])   # Define a variable Which keeps the lenght of the Users count as variable.
     changeuser_MasterPassword_Inbox = ""     # Define a variable with the value of str ("") In order to be used as MasterPassword Input in change user Operation.
-    changeuser_username_Inbox = ""   # Define A variable with the value of str ("") In order to be used as UserName input in the change user operation.
     ForgotOperation_NewMasterPassword_inbox = ""     # Define A variable with the value of str ("") In order to be used as the NewMasterPassword Input in the forgot Password Operation
     ForgotOperation_BirthDate = ""   # Define A variable with the value of str ("") In order to be used in creating the new BirthDate in the forgot MasterPassword Operation.
     BirthDate_Check = ""  # Define A variable with the value of str ("") In order to be used to check If the user have a existing Birth_Date in their Info or not To be used in the forgot MasterPassword Operation
@@ -518,8 +498,12 @@ def Main_Menu():
 
     # Start a while Loop With the condition Of the first FLAG variable to be True , In order to LOOP through the menu and It's option's.
     while LOOP1 == True:
-        
 
+
+        # Note : This Variable Is setted here for ordinary Update , Do Not remove it.
+        users_count = len(Users_Info["Users"])   # Define a variable Which keeps the lenght of the Users count as variable.
+
+                
         clean()
 
 
@@ -528,6 +512,9 @@ def Main_Menu():
             break
 
         
+        print(Users_Info)
+
+
         print("\33[34m\33[40m Here Are all the operation's You can use (Insert the Number of Operation In order to use): ")
         
 
@@ -736,6 +723,8 @@ def Main_Menu():
 
                         Number = Number + 1
 
+
+                    print("\33[31m Remember You can type in Quit Anytime you would like to exit and return to the main menu.\33[34m")
                     print("Write the PassWord name only.")
                     Want_To_Remove = input("Which One of theese Password's Would you like to delete? : ")
 
@@ -774,6 +763,21 @@ def Main_Menu():
 
 
                         LOOP3 = False ; break
+
+
+                    elif Want_To_Remove in [quit_type for quit_type in QUIT_LETTERCASE if Want_To_Remove == quit_type]:
+
+
+                        clean()
+
+
+                        print("\33[31m Returning to the main menu...\33[34m")
+
+
+                        sleep(4)
+
+
+                        LOOP3 = False
                     
 
         # CHANGE MASTERPASSWORD
@@ -945,10 +949,10 @@ def Main_Menu():
         if User_Desired_Operation in [Number for Number in Operations.keys() if Number == 5]:
 
 
-            BirthDate_Check = Users_Info["Users"][Inputted_Username].get("Birth_Date" , False)
+            BirthDate_Check = Users_Info['Users'][Inputted_Username].get('Birth_Date' , False)
 
 
-            if BirthDate_Check == "Birth_Date":
+            if BirthDate_Check != False:
 
 
                 LOOP6 = True
@@ -1102,7 +1106,7 @@ def Main_Menu():
                                             ForgotOperation_BirthDate = F"{Birth_Day_Inbox}/{Birth_Month_Inbox}/{Birth_Year_Inbox}"
 
 
-                                            if ForgotOperation_BirthDate == Users_Info["Users"][Inputted_Username]["Birth_Date"]:
+                                            if ForgotOperation_BirthDate == Users_Info['Users'][Inputted_Username]['Birth_Date']:
 
 
                                                 LOOP9 = True
@@ -1126,7 +1130,7 @@ def Main_Menu():
                                                     if ismasterpassword(ForgotOperation_NewMasterPassword_inbox):
 
 
-                                                        ForgotOperation_NewMasterPassword_inbox = Users_Info["Users"][Inputted_Username]["MasterPassword"] 
+                                                        ForgotOperation_NewMasterPassword_inbox = Users_Info['Users'][Inputted_Username]['MasterPassword'] 
 
 
                                                         print(F"{ForgotOperation_NewMasterPassword_inbox} Has been chosen as your new MasterPassword.")
@@ -1242,10 +1246,10 @@ def Main_Menu():
                 print("You Have no other account's , You can add Other Account's using add user button in the menu.")
 
                 
+                sleep(4)
+
+
                 clean()
-
-
-                continue
 
 
             else:
@@ -1366,6 +1370,7 @@ def Main_Menu():
                         LOOP10 = False
                     
 
+
                     elif changeuser_username_Inbox == Inputted_Username:
 
 
@@ -1397,10 +1402,72 @@ def Main_Menu():
 
 
                         sleep(5)
+        
+
+        # Add User Operation
+        if User_Desired_Operation in [Number for Number in user_management_operations.keys() if Number == 8]:
+
+
+            LOOP12 = True
+
+
+            while LOOP12 == True:
+
+
+                clean()
+
+
+                adduser_operation_assurance = input("Are You \33[31m \33[0mSURE \33[31mYou \33[34m Would like to add \33[31m Another Account\33[34m? (\33[31mYes Or No Only) : \33[0m")
+                adduser_operation_assurance = adduser_operation_assurance.title()
+
+
+                if adduser_operation_assurance == "Yes":
+
+
+                    clean()
+
+
+                    Collect_UserName()
+                    collect_MasterPassword()
+                    Collect_BirthDate()
+
+
+                    Current_MasterPassword = Users_Info["Users"][Inputted_Username]["MasterPassword"]
+                    changeuser_username_Inbox = Inputted_Username
+
+
+                    LOOP12 = False
+
+
+                elif adduser_operation_assurance == "No":
+
+
+                    clean()
+
+
+                    print("Returning to the main menu...")
+
+
+                    sleep(4)
+
+
+                    LOOP12 = False
+                
+
+                else:
+
+
+                    print("That Is not A \33[31m Yes \33[34m Or \33[31mNo\33[34m , Please try again")
+
+
+                    sleep(4)
+
+
+                    continue
 
 
         # Quitting Operation.
-        elif User_Desired_Operation in [Number for Number in Operations.keys() if Number == 6]:
+        if User_Desired_Operation in [Number for Number in Operations.keys() if Number == 6]:
 
 
             # One of the database Defined Function's , Which will terminate the program In a ordinary way , With a comfy GoodBye Message!
@@ -1410,4 +1477,13 @@ def Main_Menu():
 "--------------------------- Main Menu Function (End) -------------------"
 
 
-Main_Menu()
+def running():
+
+    starting()
+    Collect_UserName()
+    collect_MasterPassword()
+    Collect_BirthDate()
+    Main_Menu()
+
+
+running()

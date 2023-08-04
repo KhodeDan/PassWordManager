@@ -21,11 +21,13 @@ import sys
 "__________________ Needed Variables ________________"
 
 
-version = 'Beta 1.2.5'     # The current version of KhodeDan's Password Manager App. *(Semantic Numbering.)
+version = 'Beta 1.3.7'     # The current version of KhodeDan's Password Manager App. *(Semantic Numbering.)
 
 
 # Define a empty dictionary , Which Later Is going to contain Username's , Masterpassword's , Password's.
-Users_Info = {}
+Users_Info = {
+    "Users" : {}
+}
 
 
 # A dictionary of all the avaliable Operation's that can be used in the main menu , All assigned with a number.
