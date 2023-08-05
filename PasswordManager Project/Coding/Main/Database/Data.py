@@ -21,7 +21,7 @@ import sys
 "__________________ Needed Variables ________________"
 
 
-version = 'Beta 1.3.7'     # The current version of KhodeDan's Password Manager App. *(Semantic Numbering.)
+version = 'Beta 1.4.9'     # *Semantic Numbering.
 
 
 # Define a empty dictionary , Which Later Is going to contain Username's , Masterpassword's , Password's.
@@ -42,7 +42,7 @@ Operations = {  1 : "Viewing Passwords"
 user_management_operations = {
       7 : "Change User"
     , 8 : "Add User" 
-    , 9 : "Remove User"
+    , 9 : "Delete user"
 }
 
 
@@ -79,12 +79,19 @@ QUIT_LETTERCASE = [
 ]
 
 
+TABS = "\t"
+
+
 "_____________________________ Clearing Function _______________________________"
 
 
-# Define a function called clean , Do the Part of cleaning the terminal with Os , In an easier command.
-def clean():
+# Shorted function for os.system('cls')
+def clean() -> None:
+
+
     os.system('cls')
+
+
 clean()
 
 
@@ -96,7 +103,7 @@ clean()
 
 # Define a function called loading_Look , Which Have the order of starting the main loading look at the start of the code.
 def loading():
-    print("Loading Assets....")
+    print("\33[31mLoading Assets....")
     sleep(1)
     clean()
     print("Loading Assets...")
@@ -117,8 +124,11 @@ def loading():
     print("Loading Attachments.")
     sleep(1)
     clean()
-    print("Loading Done!")
+    print("Loading Done!\33[34m")
     sleep(1)
+
+
+    clean()
 
 
 "__________________________________________________________________________"
@@ -134,7 +144,7 @@ def termination():
             clean()
 
 
-            print("Thanks for Using KhodeDan's Password Manager.")
+            print("\33[Thanks for Using KhodeDan's Password Manager.")
 
 
             sleep(4)
@@ -348,7 +358,7 @@ def ismasterpassword(MasterPassword : str):
 "___________________________ MasterPassword Checking Function ___________________"
 
 
-"___________________________ Password Checking Function __________________________"
+
 
 
 # Define a function called ispassword , Which will check if the user entry Is a real Password , In this Case , There Isn't much prohibited Case's , Because user may enter different type of Password's (Digit , ETC)
@@ -371,5 +381,38 @@ def ispassword(password):
     return True
 
 
-"____________________________ Password checking function ________________________"
 
+
+
+"___________________________ MasterPassword Check Function ________________________"
+
+
+def equality_check(string : str , MasterPassword : str) -> bool:
+
+
+    if string == MasterPassword:
+
+
+        return True
+    
+
+    return False
+
+
+"______________________ Value by key __________________"
+
+
+def get_key_by_value(dictionary : dict , value):
+    "Recieve the key of a dictioanry by mentioning It's value"
+
+    
+    for key,value in dictionary.items():
+
+
+        if dictionary[key] == value:
+
+
+            return key
+        
+
+        return None
