@@ -3,15 +3,13 @@
 "_____________________ Imports _______________________"
 
 
-# Import the sleep function from the Built In time module.
 from time import sleep 
 
 
-# Import Os from Python Files.
 import os
 
 
-# Import the sys module , In order to use in the exiting Operation.
+# Used In exiting Oepration.
 import sys
 
 
@@ -21,7 +19,7 @@ import sys
 "__________________ Needed Variables ________________"
 
 
-version = 'Beta 1.4.9'     # *Semantic Numbering.
+version = F'Beta 1.4.13'     # *Semantic Numbering.
 
 
 # Define a empty dictionary , Which Later Is going to contain Username's , Masterpassword's , Password's.
@@ -82,6 +80,17 @@ QUIT_LETTERCASE = [
 TABS = "\t"
 
 
+# ANSI COLORING.
+color_red = "\33[31m"
+color_blue = "\33[34m"
+bold = "\33[1m" 
+format_reversed = "\33[7m"
+format_reset = "\33[0m"
+
+
+indent = print("")
+
+
 "_____________________________ Clearing Function _______________________________"
 
 
@@ -103,28 +112,28 @@ clean()
 
 # Define a function called loading_Look , Which Have the order of starting the main loading look at the start of the code.
 def loading():
-    print("\33[31mLoading Assets....")
+    print(F"{color_blue}Loading{color_red} Assets....")
     sleep(1)
     clean()
-    print("Loading Assets...")
+    print(F"{color_blue}Loading{color_red} Assets...")
     sleep(1)
     clean()
-    print("Loading Assets..")
+    print(F"{color_blue}Loading{color_red} Assets..")
     sleep(1)
     clean()
-    print("Loading Attachments....")
+    print(F"{color_blue}Loading{color_red} Attachments....")
     sleep(1)
     clean()
-    print("Loading Attachments...")
+    print(F"{color_blue}Loading{color_red} Attachments...")
     sleep(1)
     clean()
-    print("Loading Attachments..")
+    print(F"{color_blue}Loading{color_red} Attachments..")
     sleep(1)
     clean()
-    print("Loading Attachments.")
+    print(F"{color_blue}Loading{color_red} Attachments.")
     sleep(1)
     clean()
-    print("Loading Done!\33[34m")
+    print(F"{color_red}Loading{color_blue} Done.")
     sleep(1)
 
 

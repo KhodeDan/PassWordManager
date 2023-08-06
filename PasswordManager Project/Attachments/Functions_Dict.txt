@@ -4,12 +4,25 @@ Not exist In the python library Module's .
 
 ------------------------------------------------
 1. Clean() : Clean is a replacement for the python Code Os.system('cls') , Which have the order of clearing the terminal.
+
 2. loading() : A function that Is made to replace the existence of long print , Sleep command for making a loading screen.
+
 3. welcoming() : The started of the code which make's the welcome screen and UserName Taking part.
+
 4. isusername() : Checks if a string Is Only LowerCase And upperCase letters , Numbers , + Is not longer than 13 character's and Is not shorter than 3 character.
+
 5. isbirthyear() : This function will check If an integer has all the needed option's to be counted As a birthyear. (Can't be less than 1923 , And can't be more than 2022)
+
 6. isbirthmonth() : This Function will check If an integer Has all the needed option's to be counted as a birthmonth.
+
 7. isbirthday()   : This Function will check If an integer Has all the needed option's to be counted as a birthday.
+
 0. ispassword()  : This Function will check if the user entry Is actually A password (It won't limit the user much , Cause they may enter any kind of password.)
+
 8. ismasterpassword() : This function will check If an inputted Password Has all the needed option's to be counted as masterpassword.
+
 9. get_key_by_valyue() : Return's a dictionary key by passing it's value as argument.
+
+10. finish_program() : This Function will take A Needed argument , And all other arguments are optional.
+    It has the main job of giving the value : (False) To all the optional given argument,
+    It's Built for Silencing A group of flag variables that run's a whole function.

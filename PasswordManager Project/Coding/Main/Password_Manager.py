@@ -39,15 +39,13 @@ def starting():
 "------------------------- UserName collecting Function(Start) ----------------------------"
 
 
-# Define a function Called Welcoming , Which Have the Order Of initializing the start of the code.
 def Collect_UserName():
 
 
     "--------------- Loop Variables ----------------"
-    LOOP1 = True     # Define a variable with the value of True , Which Later act's as a flag variable.
-    LOOP2 = True     # Define a variable with the value of True , Which Later act's as a flag variable.
- 
-    UserName_Yes_No = None   # Define a variable Called UserName_Yes_no with NoneType value , Which later act's as a variable for asking the user If theirre sure about their entry. 
+    LOOP1 = True     # FLAG VARIABLE.
+    LOOP2 = True     # FLAG VARIABLE.
+    username_confirmation = ""
     "-----------------------------------------------"
 
 
@@ -70,9 +68,9 @@ def Collect_UserName():
 
         
         print('')
-        print("Note That \33[31mUsername's\33[34m can only contain \33[31mUppercase\33[34m , \33[31mLowerCase Letters\33[34m , \33[31mNumber's \33[34m")
+        print("Note That \33[31mUserName's\33[34m can only contain \33[31mUpperCase\33[34m , \33[31mLowerCase Letter's\33[34m , \33[31mNumber's \33[34m.")
         global Inputted_Username
-        Inputted_Username = input("Please Chose a \33[31muserName\33[34m For Your \33[31maccount\33[34m : ")
+        Inputted_Username = input("Please Chose a \33[31mUserName\33[34m For Your \33[31maccount\33[34m : ")
 
 
         
@@ -98,12 +96,12 @@ def Collect_UserName():
                     break
 
 
-                UserName_Yes_No = input(F"Are You sure you want \33[31m{Inputted_Username}\33[34m As your \33[31maccount userName\33[34m? (Answer With \33[31myes\33[34m or \33[31mno\33[34m only)  : ")
-                UserName_Yes_No = UserName_Yes_No.lower() ; UserName_Yes_No = UserName_Yes_No.strip()
-                # Turn all the letter's in The user entry to lowerCase and delete all spaces , In order to make the recognizing Easier.
+                username_confirmation = input(F"Are You sure you want \33[31m{Inputted_Username}\33[34m As your \33[31mAccount UserName\33[34m? (Answer With \33[31myes\33[34m or \33[31mno\33[34m only)  : ")
+                username_confirmation = username_confirmation.lower() 
+                username_confirmation = username_confirmation.strip()
+                
 
-
-                if UserName_Yes_No == "yes":
+                if username_confirmation == "yes":
 
 
                     clean()
@@ -112,24 +110,22 @@ def Collect_UserName():
                     Users_Info["Users"][Inputted_Username] = {}
 
 
-                    print(F"\33[31m{Inputted_Username}\33[34m Has been chosen as your \33[31musername\33[34m.")
+                    print(F"\33[31m{Inputted_Username}\33[34m Has been chosen as your \33[31mUserName\33[34m.")
                     sleep(3)
  
 
-
-                    # Set All loop variables to false , In order to finish the welcoming Program.
                     LOOP1 = False
                     LOOP2 = False
                     break
 
 
-                elif UserName_Yes_No == "no":
+                elif username_confirmation == "no":
 
 
                     clean()
 
 
-                    print("\33[31mReturning to the login Panel\33[34m")
+                    print("\33[31mReturning to the login Panel\33[34m. ")
                     sleep(3)
                     break
 
@@ -182,11 +178,11 @@ def Collect_UserName():
 def collect_MasterPassword():
     "--------------------- Needed variables -------------------"
     global Inputted_MasterPassword   # Turn the Inputted_MasterPassword Variable to a global variable.
-    Inputted_MasterPassword = None   # define a variable with the value of None which later will be user for collecting the user MasterPassword Entry.
-    MasterPassword_Add_Retry = ""  # Define a variable with the value of "" string which Later will be user for asking the user wether they are sure abou their masterpassword entry ot not.
-    LOOP1 = True     # Define a variable with the bool (True) Value In order to use as a FLAG variable in the looping Operation.
-    LOOP2 = True    # Define a variable with the bool (True) Value In order to use as a flag variable for the loop operation.
-    LOOP3 = True     # Define a variable with the bool (True) Value In order to use as a flag variable for the loop operation .
+    Inputted_MasterPassword = None   
+    MasterPassword_confirmation = ""  
+    LOOP1 = True     
+    LOOP2 = True    
+    LOOP3 = True     
     "--------------------- Needed variables -------------------"
 
 
@@ -205,8 +201,9 @@ def collect_MasterPassword():
 
 
         print("This Is the part where you should chose a \33[31mMasterPassword\33[34m.")
-        print("This \33[31mMasterPassword\33[34m will be used for accessing your \33[31maccount.\33[34m")
-        print("Do not share It with anyone.")
+        print("This \33[31mMasterPassword\33[34m will be used for accessing your \33[31mAccount\33[34m.")
+        print(F"{color_red}{bold}{format_reversed}Do not{format_reset}{color_blue} share It with anyone.")
+        print("")
         input("\33[31mPress any key to contoniue.\33[34m")
 
 
@@ -227,9 +224,8 @@ def collect_MasterPassword():
 
 
         print("The \33[31mMasterPassword\33[34m at least Must have \33[31m1 Upper Case letter \33[34m, \33[31m1 LowerCase Lettter \33[34m, And at least \33[31mA number.\33[34m")
-        Inputted_MasterPassword = input(F"Please Chose a \33[31mMasterPassword\33[34m for the account \33[31m{Inputted_Username}\33[34m : ")
-        Inputted_MasterPassword = Inputted_MasterPassword.strip()  # Delete all spaces from the user inputted masterpassword.
-
+        Inputted_MasterPassword = input(F"Please Chose a \33[31mMasterPassword\33[34m for the {color_red}Account {color_blue} ->  \33[31m{Inputted_Username}\33[34m : ")
+        Inputted_MasterPassword = Inputted_MasterPassword.strip()  
 
         if ismasterpassword(Inputted_MasterPassword):
 
@@ -247,13 +243,13 @@ def collect_MasterPassword():
 
                 
                 print("Answer with \33[31myes\33[34m or \33[31mno\33[34m only.")
-                MasterPassword_Add_Retry = input(F"Are You sure you want \33[31m{Inputted_MasterPassword}\33[34m As Your \33[31mMasterPassword \33[34m? : ")
-                MasterPassword_Add_Retry = MasterPassword_Add_Retry.lower() ; MasterPassword_Add_Retry = MasterPassword_Add_Retry.strip()
-                # Turn the first lettter of the entry to uppercase , And delete all spaces from the left and right side.
-
+                MasterPassword_confirmation = input(F"Are You sure you want \33[31m{Inputted_MasterPassword}\33[34m As Your \33[31mMasterPassword \33[34m? : ")
+                MasterPassword_confirmation = MasterPassword_confirmation.lower() 
+                MasterPassword_confirmation = MasterPassword_confirmation.strip()
+                
 
                 # Define an if statement , If the User Is sure about their decision , The MasterPassword Will be On their Username.
-                if MasterPassword_Add_Retry == "yes".lower():
+                if MasterPassword_confirmation == "yes".lower():
 
 
                     clean()
@@ -266,7 +262,7 @@ def collect_MasterPassword():
                     clean()
 
 
-                    print(F"\33[31m{Inputted_MasterPassword}\33[34m Has Been chosen as your \33[31mMasterPassword\33[34m")
+                    print(F"\33[31m{Inputted_MasterPassword}\33[34m Has Been chosen as your \33[31mMasterPassword\33[34m.")
                     sleep(3)
                     clean()
                     LOOP1 = False ; LOOP2 = False ; LOOP3 = False 
@@ -274,7 +270,7 @@ def collect_MasterPassword():
 
 
                 # Define an if statement , If the user Change their mind about the Passsword , They will be returned to the password Choosing menu.
-                elif MasterPassword_Add_Retry == "no".lower():
+                elif MasterPassword_confirmation == "no".lower():
                     clean()
                     print("\33[31mReturning to the PassWord Choosing Menu...\33[34m")
                     sleep(3)
@@ -312,218 +308,10 @@ def collect_MasterPassword():
 "---------------------------- BirthDate taking Function(Start) --------------------------"
 
 
-# Define a Function that will ask the user if they want to add their birthday or not , And Will append the birthdate to the account Information If added.
+# append the birthdate to the account Information If added.
 def Collect_BirthDate():
-    "----------------------- Needed Variables -----------------------"
-    BirthDate_Add_Pass = None    # Define a variable with the NoneType value Which will be used to ask the user if they want to add their birthdate or not.
-    Birth_Day = None     # Define a variable with the the NoneType value which will be used As the day of the user birth.
-    Birth_Month = None   # Define a variable with the NoneType value which will be used as the month of the user birth.
-    Birth_Year = None    # Define a variable with the NoneType value which will be used as the year of the user birth
-    Birth_Date = None    # Define a variable with the NoneType value which will be used as the full birthdate (YY/MMM/DD)
-    Date_Yes_No = None   # Define variable with the NoneType value which will be used as the input variable to make sure if the user accept the date as their birthdate.
-    LOOP1 = True     # Define a variable with the  bool (True) Value which will be used as the FLAG variable for the looping Operation.
-    LOOP2 = True     # Define a variable with the bool (True) Value which will be used as the FLAG variable for the looping Operation.
-    LOOP3 = True     # Define a variable with the bool (True) Value which will be used as the FLAG variable for the looping Operation.
-    LOOP4 = True     # Define a variable with the bool (True) Value which will be used as the FLAG variable for the looping Operation.
-    LOOP5 = True     # Define a variable with the bool (True) Value which will be used as the FLAG variable for the looping Operation.
-    "----------------------- Needed Variables -----------------------"
-
-
-    clean()
-
     
-    print("Now that you have a \33[31mMasterPassword\33[34m , You need a way for \33[31mrecovering\33[34m It If needed.")
-    print("In this case , You can add your \33[31mBirthDate\33[34m for the \33[31mrecovery Operation.\33[34m")
-    input("Press any key to continue.")
-
-
-    # Start A While loop In order to ask the user If they want to add their birthdate or not.
-    while LOOP1 == True:
-
-
-        LOOP1 = True
-
-    
-        clean()
-        print("Answer with \33[31mYes \33[34mor \33[31mno \33[34monly.")
-        BirthDate_Add_Pass = input("Would You like to Add your \33[31mbirthdate\33[34m for the \33[31mrecovery Operation\33[34m? : ")
-        BirthDate_Add_Pass = BirthDate_Add_Pass.lower() ; BirthDate_Add_Pass.strip()
-        # Turn all the letter's in the User entry to LowerCase , Delete All spaces at the left and right side.
-
-
-        if BirthDate_Add_Pass == "yes":
-
-
-            LOOP2 = True
-
-
-            while LOOP2 == True:
-
-
-                clean()
-
-
-                if LOOP2 == False:
-                    break
-
-
-                try:
-                    Birth_Day = int(input("Please enter the \33[31mday\33[34m you were born (\33[31m1 To 31\33[34m) : "))
-                
-
-                except:
-                    clean()
-                    continue
-                
-
-                if isbirthday(Birth_Day):
-
-
-                    while LOOP3 == True:
-
-
-                        LOOP3 = True
-
-
-                        clean()
-
-
-                        if LOOP3 == False:
-                            break
-
-
-                        try:
-
-
-                            Birth_Month = int(input("Please enter your \33[31mBirthMonth\33[34m (\33[31m1 To 12)\33[34m : "))
-
-
-
-                                
-
-                        except:
-                                    
-
-                            clean()
-
-
-                            continue
-
-
-                        if isbirthmonth(Birth_Month):
-
-
-                            LOOP4 = True
-
-
-                            while LOOP4 == True:
-
-
-                                clean()
-
-
-                                if LOOP4 == False:
-                                    break
-
-
-                                try:
-
-
-                                    Birth_Year = int(input("Please enter the \33[31myear\33[34m you've been born (\33[31m1923 TO 2022)\33[34m : "))
-
-
-                                    if isbirthyear(Birth_Year):
-
-
-                                        LOOP5 = True
-
-
-                                        clean()
-
-
-                                        while LOOP5 == True:
-
-
-                                            clean()
-
-
-                                            if LOOP5 == False:
-                                                break
-
-
-                                            Birth_Date = F"{Birth_Day}/{Birth_Month}/{Birth_Year}"
-
-
-                                            print("Answer with \33[31myes \33[34mor \33[31mno only.\33[34m")
-                                            Date_Yes_No = input(F"Are You sure You accept This \33[31mdate\33[34m as your \33[31mbirthdate\33[34m : \33[31m{Birth_Date}\33[34m : ")
-
-                                            Date_Yes_No = Date_Yes_No.lower() 
-                                            Date_Yes_No = Date_Yes_No.strip()
-
-
-                                            if Date_Yes_No == "yes":
-
-
-                                                clean()
-
-
-                                                Users_Info["Users"][Inputted_Username]["Birth_Date"] = Birth_Date
-                                                
-
-                                                print(F"\33[31m{Birth_Date}\33[34m Has Been Chosen as your \33[31maccount Birthday.\33[34m")
-                                                print("Diverting to the main menu.")
-                                                sleep(3)
-
-
-                                                LOOP1 = False
-                                                LOOP2 = False
-                                                LOOP3 = False
-                                                LOOP4 = False
-                                                LOOP5 = False
-                                            
-
-                                            elif Date_Yes_No == "no":
-
-
-                                                clean()
-                                                print("\33[31m Returning...")
-
-
-                                                LOOP5 = False
-                                                LOOP4 = False
-                                                LOOP3 = False
-                                                LOOP2 = False
-                                        
-
-
-
-
-
-
-
-                                except:
-
-
-                                    clean()
-                                    continue
-
-
-        elif BirthDate_Add_Pass == "no":
-            
-
-            clean()
-            
-
-            print("\33[31mDiverting to the menu...\33[34m")
-            
-
-            sleep(3)
-
-
-            LOOP1 = False
-
-
-"---------------------------- BirthDate Taking function (End)--------------------"
+    ...
 
 
 "------------------------------ Main Menu function (Start) ----------------------"
