@@ -1,0 +1,9 @@
+FlowChart rules :
+
+	Loop starting , Finishing , Change In operation's will be written In sqaure.
+	Normal Face off Job's will be written In circle. ( Off Circle )
+	Connector's ( Classe's , Function's Will ) be written in triangles.
+	Connected attribute's will be written In Off Page refrences.
+	Database connection's will be written In Database Shape.
+	Connection's will be Refrenced With circlehead Line.
+	Import's and accesse's will be Refrenced With Arrowhead Line.
