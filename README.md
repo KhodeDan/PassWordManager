@@ -1,6 +1,6 @@
 # What Is PasswordManager project?
 
-**This is a Solo project For me to train and learn the concept's of Python foundmental And use all of them In this project , To the moment That The Coding structure Reach An acceptable And Unrusted aspect.**
+**This project serves as a personal endeavor for me to enhance my skills and understanding of fundamental Python concepts. It allows me to apply these concepts comprehensively, aiming to achieve a robust and reliable coding structure. The project is pursued independently, with the goal of reaching a satisfactory and dependable outcome.**
 
 # Table Of contents : 
 > Git:
