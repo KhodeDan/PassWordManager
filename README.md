@@ -4,7 +4,7 @@
 
 # Table Of contents : 
 > Git:
-  - README : Repository Page , Main File
+  - README : Repository Page , Main File 
   - License : Repository Page , Main file
 > Informations:
   - Functions dictionary : Attachments -> Additional Info
