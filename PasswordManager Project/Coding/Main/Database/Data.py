@@ -2,12 +2,12 @@ from dataclasses import dataclass
 
 from time import sleep
 
-import os
-
 import sys
 
+import os
 
-version = F'Beta 1.4.13'     # *Semantic Numbering.
+
+version = f'Beta 1.5.15'     # *Semantic Numbering.
 
 Users_Info = {
     "Users" : {}
@@ -66,14 +66,10 @@ format_reversed = "\33[7m"
 format_reset = "\33[0m"
 
 
-indent = print("")
-
-
 def clean() -> None:
+    """Clear the terminal"""
 
     os.system('cls')
-
-clean()
 
 
 def loading():
@@ -106,19 +102,20 @@ def loading():
 
 
 def termination():
+            """Exit the program with goodbye message."""
 
             clean()
-            print("\33[Thanks for Using KhodeDan's Password Manager.")
+            print("\33[ Thanks for Using KhodeDan's Password Manager.")
             sleep(4)
             clean()
             print("\33[1;31;40mQuitting.... \33[0m")
             sleep(3)
             clean()
 
-            sys.exit()   # This syntax used with sys module , Will tell the python interpreter to terminate the project.
+            sys.exit()   
 
 
-# Define a function that will check the Chosen UserName , And see If it meet's the minimum Requirement's.
+
 def isusername(UserName : str):
 
     UserName_Last_Limit = 13     
@@ -261,7 +258,6 @@ def ismasterpassword(MasterPassword : str):
 
 
 
-# Define a function called ispassword , Which will check if the user entry Is a real Password , In this Case , There Isn't much prohibited Case's , Because user may enter different type of Password's (Digit , ETC)
 def ispassword(password):
 
     Password_Firstlimi = 1   # Define a variable with the value of int 1 , Which will act as the limitation for the user entry lengh.
@@ -293,22 +289,28 @@ def equality_check(string : str , MasterPassword : str) -> bool:
     return False
 
 
-"______________________ Value by key __________________"
-
-
 def get_key_by_value(dictionary : dict , value):
-    "Recieve the key of a dictioanry by mentioning It's value"
-
+    """return the key of dictionary by providing its value"""
     
     for key,value in dictionary.items():
-
-
-        if dictionary[key] == value:
-
-
+        
+        if key == value:
             return key
         
 
-        return None
+@dataclass
+class database:
+    """The whole program database that holds all the variables"""
 
-    
+    def birth_database():
+
+        birthdate_add_pass : str = None
+        birth_day : int = None
+        birth_month : int = None
+        birth_year : int = None
+        full_birth_date : str = f"{birth_day}/{birth_month}/{birth_year}"
+
+        confirm_birthday : str = None
+        confirm_birthmonth : str = None
+        confirm_birthyear : str = None
+        confirm_full_birthdate : str = None

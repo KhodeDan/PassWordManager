@@ -1,42 +1,14 @@
-"___________________________ Importing ___________________________________"
 
-
-# Import All neded variable's and exponent's from The Database.
 from Database.Data import *
 
 
-"__________________________________________________________________________"
-
-
-# Define a function That will make the starting Operation Of the app.
 def starting():
 
-
-    "---------------------------- Loading Look --------------------------------"
-
-
-    # Call the function Loading Look , One of the Database Made function's that will make The Code Look like a loading screen
     loading()
-
-
-    "--------------------------------------------------------------------------"
-
-
-    "---------------------------- welcoming -----------------------------------"
 
 
     print(F"Welcome to KhodeDan Password Manager version : \33[31m{version}\33[34m")
     sleep(4)
-
-
-    "--------------------------- welcoming ------------------------------------"
-
-
-
-
-
-
-"------------------------- UserName collecting Function(Start) ----------------------------"
 
 
 def Collect_UserName():
@@ -1243,7 +1215,7 @@ def Main_Menu():
 
 
                         LOOP10 = False
-                    
+
 
 
                     elif changeuser_username_Inbox == Inputted_Username:
@@ -1300,8 +1272,6 @@ def Main_Menu():
 
 
                     clean()
-
-
                     Collect_UserName()
                     collect_MasterPassword()
                     Collect_BirthDate()
@@ -1427,24 +1397,11 @@ def Main_Menu():
 
 
         # Quitting Operation.
-        if User_Desired_Operation in [Number for Number in Operations.keys() if Number == 6]:
+        if User_Desired_Operation in [Number for Number in user_management_operations.keys() if Number == 6]:
 
-
-            # One of the database Defined Function's , Which will terminate the program In a ordinary way , With a comfy GoodBye Message!
             termination()
 
 
-"--------------------------- Main Menu Function (End) -------------------"
 
 
-def running():
-
-    starting()
-    Collect_UserName()
-    collect_MasterPassword()
-    Collect_BirthDate()
-    Main_Menu()
-
-
-running()
-
+    
