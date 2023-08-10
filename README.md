@@ -4,8 +4,8 @@
 
 # Table Of contents : 
 > Git:
-- README : Here , Main File
-- License : Main File
+- README : Repository Page , Main File
+- License : Repository Page , Main file
 > Informations:
 - Functions dictionary : Attachments/Additional Info
 - FlowChart creating rules : Attachments/Additional Info
