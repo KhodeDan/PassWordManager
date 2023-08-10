@@ -7,13 +7,13 @@
 - README : Repository Page , Main File
 - License : Repository Page , Main file
 > Informations:
-- Functions dictionary : Attachments/Additional Info
-- FlowChart creating rules : Attachments/Additional Info
+- Functions dictionary : Attachments -> Additional Info
+- FlowChart creating rules : Attachments -> Additional Info
 > Algorithms:
-- Collect_BirthDate function Algorithm : Attachments/Algorithms
-- Main project algorithm : attachments/Algorithms
+- Collect_BirthDate function Algorithm : Attachments -> Algorithms
+- Main project algorithm : attachments ->Algorithms
 > Coding :
-- Main coding file : Coding/Main
-- Database : Coding/Main/Database
+- Main coding file : Coding -> Main
+- Database : Coding -> Main -> Database
 
 
