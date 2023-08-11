@@ -1,5 +1,7 @@
 from dataclasses import dataclass
 
+from functools import cache
+
 from time import sleep
 
 import sys
@@ -7,7 +9,7 @@ import sys
 import os
 
 
-version = f'Beta 1.5.15'     # *Semantic Numbering.
+version = f'Beta 1.5.16'     # *Semantic Numbering.
 
 Users_Info = {
     "Users" : {}
@@ -27,7 +29,7 @@ user_management_operations = {
 }
 
 # Usage in different Input accepting , Denying.
-allowed = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" ,"0" , "1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" , "9" , ]
+allowed_character = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" ,"0" , "1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" , "9" , ]
 UpperCase_Letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ,]
 LowerCase_Letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 Numbers = ["1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" , "9" , "0"]
@@ -115,7 +117,6 @@ def termination():
             sys.exit()   
 
 
-
 def isusername(UserName : str):
 
     UserName_Last_Limit = 13     
@@ -137,12 +138,11 @@ def isusername(UserName : str):
     
     for character in UserName:
 
-        if character not in allowed:
+        if character not in allowed_character:
         
             return False
     
     return True
-
 
 
 def isbirthyear(birthyear : int):
@@ -166,17 +166,10 @@ def isbirthyear(birthyear : int):
         return False
 
 
-"_______________________ Birthyear Checking Function ______________________"
-
-
-
-
-
-
 def isbirthmonth(birthmonth : int):
 
     birthmonth_First_Limit = 1
-    birthmonth_Last_Limit = 13
+    birthmonth_Last_Limit = 12
 
 
     if birthmonth > birthmonth_Last_Limit:
@@ -211,13 +204,7 @@ def isbirthday(birthday : int):
         return False
 
 
-"___________________________ Birthday Checking Function __________________________"
 
-
-"___________________________ MasterPassword Checking Function ___________________"
-
-
-# define a function called MasterPassword with a string argument in order to make sure a string Has all the option's needed to be counted as a masterPassword.
 def ismasterpassword(MasterPassword : str):
 
     point = 3
@@ -250,12 +237,6 @@ def ismasterpassword(MasterPassword : str):
 
     else:
         return False
-
-    
-"___________________________ MasterPassword Checking Function ___________________"
-
-
-
 
 
 def ispassword(password):
@@ -296,21 +277,85 @@ def get_key_by_value(dictionary : dict , value):
         
         if key == value:
             return key
-        
 
+
+def is_yes_no(data) -> bool:
+
+    if not data == "yes" or "no":
+        return False
+    
+    return True
+
+ 
 @dataclass
-class database:
-    """The whole program database that holds all the variables"""
+class birthDateDatabase:
+    """The whole birthday calculation databse ( Keeps all the variables )"""
 
-    def birth_database():
+    birthdate_add_pass : str = None
+    birth_day : str = None
+    birth_month : str = None
+    birth_year : str = None
+    full_birthday : str = None
 
-        birthdate_add_pass : str = None
-        birth_day : int = None
-        birth_month : int = None
-        birth_year : int = None
-        full_birth_date : str = f"{birth_day}/{birth_month}/{birth_year}"
+    add_pass_answer : bool = False
+    confirm_birthday : str = None
+    confirm_birthmonth : str = None
+    confirm_birthyear : str = None
+    confirm_full_birthdate : str = None
 
-        confirm_birthday : str = None
-        confirm_birthmonth : str = None
-        confirm_birthyear : str = None
-        confirm_full_birthdate : str = None
+    LOOP1 : bool = True
+    LOOP2 : bool = True
+    LOOOP3 : bool = True
+    LOOP4 : bool = True
+    LOOP5 : bool = True
+
+    invalid_entry : bool = False
+    
+
+class birthDateFunctions:
+
+    @staticmethod
+    def add_pass() -> bool:
+        """Ask the User if they want to add their birthday"""
+
+        while birthDateDatabase.LOOP1 :
+
+            # RESETTING THE ENTRY CORRECTION.
+            birthDateDatabase.invalid_entry = False
+            clean()
+
+            birthDateDatabase.birthdate_add_pass = input(
+                f"{color_blue} Would you like to add A birthday to your account ?(Answer with yes or no only) : ")
+            birthDateDatabase.birthdate_add_pass = birthDateDatabase.birthdate_add_pass.lower()
+
+            if not is_yes_no(birthDateDatabase.birthdate_add_pass):
+
+                clean()
+                print(f"{color_red} That Is not a yes or no , Please try again{color_blue}.")
+                sleep(4)
+                birthDateDatabase.invalid_entry = True
+                continue
+            
+            if birthDateDatabase.birthdate_add_pass == "no":
+
+                clean()
+                print(f"{color_red} Diverting to the main menu.")
+                sleep(4)
+                clean()
+                birthDateDatabase.add_pass_answer = False
+                birthDateDatabase.LOOP1 = False
+                continue
+            
+            clean()
+            
+
+    @staticmethod
+    def calculation() -> None:
+        """Calculate the full birthdate of the user"""
+
+        birthDateDatabase.full_birthday = f"{birthDateDatabase.birth_day}/{birthDateDatabase.birth_month}\
+            /{birthDateDatabase.birth_year}"
+        
+        return birthDateDatabase.full_birthday
+    
+birthDateFunctions.add_pass()

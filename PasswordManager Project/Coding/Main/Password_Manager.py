@@ -270,26 +270,11 @@ def collect_MasterPassword():
             input("\33[34mPress any key to continue.")                
 
 
-            
-
-
-
-"---------------------------- MasterPassword Taking Function(End) -----------------------"
-
-
-"---------------------------- BirthDate taking Function(Start) --------------------------"
-
-
-# append the birthdate to the account Information If added.
 def Collect_BirthDate():
     
     ...
 
 
-"------------------------------ Main Menu function (Start) ----------------------"
-
-
-# Define a function Named Main Menu , Which Act's as the main menu of the password manager , Containing All the operation's the user can use.
 def Main_Menu():
     "-------------------------- Needed Variables ------------------------"
     LOOP1 = True     # Define A bool (True) Variable In order to be used as FLAG variable in the looping operation.
