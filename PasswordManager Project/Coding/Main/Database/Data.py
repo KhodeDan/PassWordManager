@@ -1,7 +1,5 @@
 from dataclasses import dataclass
 
-from functools import cache
-
 from time import sleep
 
 import sys
@@ -9,7 +7,7 @@ import sys
 import os
 
 
-version = f'Beta 1.5.16'     # *Semantic Numbering.
+version = f'Beta 1.5.19'
 
 Users_Info = {
     "Users" : {}
@@ -60,12 +58,16 @@ QUIT_LETTERCASE = [
 
 TABS = "\t"
 
-# ANSI COLORING.
 color_red = "\33[31m"
 color_blue = "\33[34m"
 bold = "\33[1m" 
 format_reversed = "\33[7m"
 format_reset = "\33[0m"
+
+
+def quit() -> None:
+    """Terminate a function or the main program"""
+    sys.exit()
 
 
 def clean() -> None:
@@ -103,7 +105,7 @@ def loading():
     clean()
 
 
-def termination():
+def good_bye():
             """Exit the program with goodbye message."""
 
             clean()
@@ -114,7 +116,7 @@ def termination():
             sleep(3)
             clean()
 
-            sys.exit()   
+            quit()
 
 
 def isusername(UserName : str):
@@ -241,31 +243,28 @@ def ismasterpassword(MasterPassword : str):
 
 def ispassword(password):
 
-    Password_Firstlimi = 1   # Define a variable with the value of int 1 , Which will act as the limitation for the user entry lengh.
-    Password_Lastlimit = 30  # Define a variable with the value of int 50 , Which will act as the limitation for the user entry lengh.
-    Password_Lengh = len(password)   # Define a variable which will keep the lengh of the entered password , As value.
+    password_character_limit = 1   
+    password_ending_character_limit = 30 
+    Password_Lengh = len(password)   
 
 
 
-    if Password_Lengh > Password_Lastlimit:
+    if Password_Lengh > password_ending_character_limit:
         return False
     
 
-    if Password_Lengh < Password_Firstlimi:
+    if Password_Lengh < password_character_limit:
         return False
     
 
     return True
 
 
-def equality_check(string : str , MasterPassword : str) -> bool:
+def equality_check(arg1 : str , arg2 : str) -> bool:
+    """Checks if two strings are equal to each other"""
 
-
-    if string == MasterPassword:
-
-
+    if arg1 == arg2:
         return True
-    
 
     return False
 
@@ -279,16 +278,16 @@ def get_key_by_value(dictionary : dict , value):
             return key
 
 
-def is_yes_no(data) -> bool:
+def is_yes_or_no(user_input) -> bool:
 
-    if not data == "yes" or "no":
+    if not user_input.lower() == "yes" and not user_input.lower() == "no":
         return False
     
     return True
 
  
 @dataclass
-class birthDateDatabase:
+class BirthDateDatabase:
     """The whole birthday calculation databse ( Keeps all the variables )"""
 
     birthdate_add_pass : str = None
@@ -303,51 +302,45 @@ class birthDateDatabase:
     confirm_birthyear : str = None
     confirm_full_birthdate : str = None
 
-    LOOP1 : bool = True
-    LOOP2 : bool = True
-    LOOOP3 : bool = True
-    LOOP4 : bool = True
-    LOOP5 : bool = True
-
-    invalid_entry : bool = False
+    add_or_pass_invalid_entry : bool = False
     
 
-class birthDateFunctions:
+class BirthDateFunctions:
 
     @staticmethod
-    def add_pass() -> bool:
+    def add_or_pass_birthdate() -> bool:
         """Ask the User if they want to add their birthday"""
 
-        while birthDateDatabase.LOOP1 :
+        clean()
 
-            # RESETTING THE ENTRY CORRECTION.
-            birthDateDatabase.invalid_entry = False
+        birthDateDatabase.birthdate_add_pass = input(
+            f"{color_blue} Would you like to add A birthday to your account ?(Answer with yes or no only) : ")
+        birthDateDatabase.birthdate_add_pass = birthDateDatabase.birthdate_add_pass.lower()
+        
+
+        if not is_yes_or_no(birthDateDatabase.birthdate_add_pass):
+
             clean()
-
-            birthDateDatabase.birthdate_add_pass = input(
-                f"{color_blue} Would you like to add A birthday to your account ?(Answer with yes or no only) : ")
-            birthDateDatabase.birthdate_add_pass = birthDateDatabase.birthdate_add_pass.lower()
-
-            if not is_yes_no(birthDateDatabase.birthdate_add_pass):
-
-                clean()
-                print(f"{color_red} That Is not a yes or no , Please try again{color_blue}.")
-                sleep(4)
-                birthDateDatabase.invalid_entry = True
-                continue
+            print(f"{color_red} That Is not a yes or no , Please try again{color_blue}.")
+            sleep(4)
+            birthDateDatabase.add_or_pass_invalid_entry = True
+            return None
             
-            if birthDateDatabase.birthdate_add_pass == "no":
+        if birthDateDatabase.birthdate_add_pass == "no":
 
-                clean()
-                print(f"{color_red} Diverting to the main menu.")
-                sleep(4)
-                clean()
-                birthDateDatabase.add_pass_answer = False
-                birthDateDatabase.LOOP1 = False
-                continue
-            
             clean()
-            
+            print(f"{color_red} Diverting to the main menu{color_blue}.")
+            sleep(4)
+            clean()
+            birthDateDatabase.add_pass_answer = False
+            return None
+        
+        if birthDateDatabase.birthdate_add_pass == "yes":
+
+            clean()
+            print(f"{color_red}Diverting to the birthdate panel...")
+            birthDateDatabase.add_pass_answer = True
+            return None
 
     @staticmethod
     def calculation() -> None:
@@ -358,4 +351,4 @@ class birthDateFunctions:
         
         return birthDateDatabase.full_birthday
     
-birthDateFunctions.add_pass()
+birthDateFunctions.add_or_pass_birthdate()

@@ -15,8 +15,8 @@ def Collect_UserName():
 
 
     "--------------- Loop Variables ----------------"
-    LOOP1 = True     # FLAG VARIABLE.
-    LOOP2 = True     # FLAG VARIABLE.
+    LOOP1 = True     
+    LOOP2 = True     
     username_confirmation = ""
     "-----------------------------------------------"
 
@@ -41,12 +41,12 @@ def Collect_UserName():
         
         print('')
         print("Note That \33[31mUserName's\33[34m can only contain \33[31mUpperCase\33[34m , \33[31mLowerCase Letter's\33[34m , \33[31mNumber's \33[34m.")
-        global Inputted_Username
-        Inputted_Username = input("Please Chose a \33[31mUserName\33[34m For Your \33[31maccount\33[34m : ")
+        global inputted_username
+        inputted_username = input("Please Chose a \33[31mUserName\33[34m For Your \33[31maccount\33[34m : ")
 
 
         
-        if isusername(Inputted_Username) and Inputted_Username not in Users_Info["Users"].keys():
+        if isusername(inputted_username) and inputted_username not in Users_Info["Users"].keys():
 
             sleep(1)
 
@@ -68,7 +68,7 @@ def Collect_UserName():
                     break
 
 
-                username_confirmation = input(F"Are You sure you want \33[31m{Inputted_Username}\33[34m As your \33[31mAccount UserName\33[34m? (Answer With \33[31myes\33[34m or \33[31mno\33[34m only)  : ")
+                username_confirmation = input(F"Are You sure you want \33[31m{inputted_username}\33[34m As your \33[31mAccount UserName\33[34m? (Answer With \33[31myes\33[34m or \33[31mno\33[34m only)  : ")
                 username_confirmation = username_confirmation.lower() 
                 username_confirmation = username_confirmation.strip()
                 
@@ -79,10 +79,10 @@ def Collect_UserName():
                     clean()
 
 
-                    Users_Info["Users"][Inputted_Username] = {}
+                    Users_Info["Users"][inputted_username] = {}
 
 
-                    print(F"\33[31m{Inputted_Username}\33[34m Has been chosen as your \33[31mUserName\33[34m.")
+                    print(F"\33[31m{inputted_username}\33[34m Has been chosen as your \33[31mUserName\33[34m.")
                     sleep(3)
  
 
@@ -110,7 +110,7 @@ def Collect_UserName():
                     sleep(3)
         
 
-        elif Inputted_Username in Users_Info["Users"].keys():
+        elif inputted_username in Users_Info["Users"].keys():
 
 
             clean()
@@ -151,7 +151,7 @@ def collect_MasterPassword():
     "--------------------- Needed variables -------------------"
     global Inputted_MasterPassword   # Turn the Inputted_MasterPassword Variable to a global variable.
     Inputted_MasterPassword = None   
-    MasterPassword_confirmation = ""  
+    confirm_masterpassword = ""  
     LOOP1 = True     
     LOOP2 = True    
     LOOP3 = True     
@@ -196,7 +196,7 @@ def collect_MasterPassword():
 
 
         print("The \33[31mMasterPassword\33[34m at least Must have \33[31m1 Upper Case letter \33[34m, \33[31m1 LowerCase Lettter \33[34m, And at least \33[31mA number.\33[34m")
-        Inputted_MasterPassword = input(F"Please Chose a \33[31mMasterPassword\33[34m for the {color_red}Account {color_blue} ->  \33[31m{Inputted_Username}\33[34m : ")
+        Inputted_MasterPassword = input(F"Please Chose a \33[31mMasterPassword\33[34m for the {color_red}Account {color_blue} ->  \33[31m{inputted_username}\33[34m : ")
         Inputted_MasterPassword = Inputted_MasterPassword.strip()  
 
         if ismasterpassword(Inputted_MasterPassword):
@@ -215,21 +215,21 @@ def collect_MasterPassword():
 
                 
                 print("Answer with \33[31myes\33[34m or \33[31mno\33[34m only.")
-                MasterPassword_confirmation = input(F"Are You sure you want \33[31m{Inputted_MasterPassword}\33[34m As Your \33[31mMasterPassword \33[34m? : ")
-                MasterPassword_confirmation = MasterPassword_confirmation.lower() 
-                MasterPassword_confirmation = MasterPassword_confirmation.strip()
+                confirm_masterpassword = input(F"Are You sure you want \33[31m{Inputted_MasterPassword}\33[34m As Your \33[31mMasterPassword \33[34m? : ")
+                confirm_masterpassword = confirm_masterpassword.lower() 
+                confirm_masterpassword = confirm_masterpassword.strip()
                 
 
                 # Define an if statement , If the User Is sure about their decision , The MasterPassword Will be On their Username.
-                if MasterPassword_confirmation == "yes".lower():
+                if confirm_masterpassword == "yes".lower():
 
 
                     clean()
 
 
-                    Users_Info["Users"][Inputted_Username] = {}
-                    Users_Info["Users"][Inputted_Username]["MasterPassword"] = Inputted_MasterPassword
-                    Users_Info["Users"][Inputted_Username]["PassWords"] = {}
+                    Users_Info["Users"][inputted_username] = {}
+                    Users_Info["Users"][inputted_username]["MasterPassword"] = Inputted_MasterPassword
+                    Users_Info["Users"][inputted_username]["PassWords"] = {}
 
                     clean()
 
@@ -242,7 +242,7 @@ def collect_MasterPassword():
 
 
                 # Define an if statement , If the user Change their mind about the Passsword , They will be returned to the password Choosing menu.
-                elif MasterPassword_confirmation == "no".lower():
+                elif confirm_masterpassword == "no".lower():
                     clean()
                     print("\33[31mReturning to the PassWord Choosing Menu...\33[34m")
                     sleep(3)
@@ -270,7 +270,7 @@ def collect_MasterPassword():
             input("\33[34mPress any key to continue.")                
 
 
-def Collect_BirthDate():
+def collect_birthdate():
     
     ...
 
@@ -301,7 +301,7 @@ def Main_Menu():
     Birth_Day_Inbox = ""     # Define A str ("") Variable In order to be used as BirthDay Input identifier In the forgot MasterPassword Operation.
     Birth_Month_Inbox = ""   # Define A str ("") Variable In order to be used as BirthMonth Input Identifier In the forgot MasterPassword Operation.
     Birth_Year_Inbox = ""    # Define A str("") Variable in order to be used as BirthYear Input Identifier In the forgot MasterPassword Operation.
-    Current_MasterPassword = Users_Info["Users"][Inputted_Username]["MasterPassword"]    # Define a variable with the value of The user Current MasterPassword (Titled) , In order to be used in the MasterPassword Concerned Operation's.
+    Current_MasterPassword = Users_Info["Users"][inputted_username]["MasterPassword"]    # Define a variable with the value of The user Current MasterPassword (Titled) , In order to be used in the MasterPassword Concerned Operation's.
     User_Desired_Operation = ""    # Define A str ("") Value Variable in Order to be used as the User Input storing Variable , In order to understand what operation they want to use.\
     MasterPassword_Inbox = ""    # Define A str ("") Value variable In order to use as an input , In the changing MasterPassword Operation.
     New_MasterPassword_Inbox = ""    # Define A str ("") Value Variable In order to use as an input , In the changing MasterPassword Operation.
@@ -330,7 +330,7 @@ def Main_Menu():
 
 
         print("\33[31m_____________________________________________________\33[34m")
-        print(F"Logged Into Account \33[31m ⁛  {Inputted_Username} ⁛")
+        print(F"Logged Into Account \33[31m ⁛  {inputted_username} ⁛")
         print("\33[31m_____________________________________________________\33[34m")
 
 
@@ -392,7 +392,7 @@ def Main_Menu():
         if User_Desired_Operation in [Number for Number in Operations.keys() if Number == 1]:
     
     
-            if len(Users_Info["Users"][Inputted_Username]["PassWords"]) == 0:
+            if len(Users_Info["Users"][inputted_username]["PassWords"]) == 0:
     
     
                 clean()
@@ -421,7 +421,7 @@ def Main_Menu():
                 Number = 1
 
 
-                for PassWord,Title in Users_Info["Users"][Inputted_Username]["PassWords"].items():
+                for PassWord,Title in Users_Info["Users"][inputted_username]["PassWords"].items():
                             
                         
                     print(F"{Number} . {PassWord} : {Title}")
@@ -464,10 +464,10 @@ def Main_Menu():
 
 
                 # This If statement will check ( If the Entered password Is not an empty string and if the entered Password Allready Don't exist in the User passwords )
-                if ispassword(Desired_PassWord) and PassWord_Title not in Users_Info["Users"][Inputted_Username]["PassWords"].values():
+                if ispassword(Desired_PassWord) and PassWord_Title not in Users_Info["Users"][inputted_username]["PassWords"].values():
     
     
-                    Users_Info["Users"][Inputted_Username]["PassWords"][Desired_PassWord] = PassWord_Title
+                    Users_Info["Users"][inputted_username]["PassWords"][Desired_PassWord] = PassWord_Title
     
     
                     print(F" \33[31m{Desired_PassWord}\33[34m Has been added to your password's list as \33[31m{PassWord_Title}\33[34m")
@@ -480,7 +480,7 @@ def Main_Menu():
                     LOOP2 = False
 
                 
-                elif PassWord_Title in Users_Info["Users"][Inputted_Username]["PassWords"].values():
+                elif PassWord_Title in Users_Info["Users"][inputted_username]["PassWords"].values():
 
 
                     clean()
@@ -488,7 +488,7 @@ def Main_Menu():
                     sleep(4)
                 
 
-                elif Desired_PassWord in Users_Info["Users"][Inputted_Username]["PassWords"].keys():
+                elif Desired_PassWord in Users_Info["Users"][inputted_username]["PassWords"].keys():
 
 
                     clean()
@@ -516,7 +516,7 @@ def Main_Menu():
                 clean()
 
 
-                if len(Users_Info["Users"][Inputted_Username][PassWords]) == 0:
+                if len(Users_Info["Users"][inputted_username][PassWords]) == 0:
 
 
                     print("You currently Have no \33[31mPassword\33[34m Stored , You can add password's using the \33[31mAdd\33[34m Password Option In the menu.")
@@ -538,7 +538,7 @@ def Main_Menu():
                     Number = 1
 
 
-                    for PassWord,PassWord_Title in Users_Info["Users"][Inputted_Username][PassWords].items():
+                    for PassWord,PassWord_Title in Users_Info["Users"][inputted_username][PassWords].items():
 
 
                         print(F"\33[31m{Number}\33[34m . \33[31m{PassWord}\33[34m : {PassWord_Title}")
@@ -553,7 +553,7 @@ def Main_Menu():
                     Want_To_Remove = input("Which One of theese Password's Would you like to \33[31mdelete\33[34m? : ")
 
 
-                    if Want_To_Remove in [password_title for password_title in Users_Info["Users"][Inputted_Username]["PassWords"].values() if Want_To_Remove == password_title]:
+                    if Want_To_Remove in [password_title for password_title in Users_Info["Users"][inputted_username]["PassWords"].values() if Want_To_Remove == password_title]:
 
 
                         clean()
@@ -561,7 +561,7 @@ def Main_Menu():
                         try:
 
 
-                            del Users_Info["Users"][Inputted_Username]["PassWords"][get_key_by_value(Users_Info , Want_To_Remove)]
+                            del Users_Info["Users"][inputted_username]["PassWords"][get_key_by_value(Users_Info , Want_To_Remove)]
 
                 
                             print(F"\33[31m{PassWord_Title}\33[34m has been deleted.")
@@ -670,11 +670,11 @@ def Main_Menu():
 
                             try:
 
-                                Users_Info["Users"][Inputted_Username]["MasterPassword"] = New_MasterPassword_Inbox
+                                Users_Info["Users"][inputted_username]["MasterPassword"] = New_MasterPassword_Inbox
 
 
                                 # Change the current password variable In order to avoid Upcoming Error's everytime the operation Rerun's.
-                                Current_MasterPassword = Users_Info["Users"][Inputted_Username]["MasterPassword"]
+                                Current_MasterPassword = Users_Info["Users"][inputted_username]["MasterPassword"]
 
 
                                 clean()
@@ -781,7 +781,7 @@ def Main_Menu():
         if User_Desired_Operation in [Number for Number in Operations.keys() if Number == 5]:
 
 
-            BirthDate_Check = Users_Info['Users'][Inputted_Username].get('Birth_Date' , False)
+            BirthDate_Check = Users_Info['Users'][inputted_username].get('Birth_Date' , False)
 
 
             if BirthDate_Check != False:
@@ -938,7 +938,7 @@ def Main_Menu():
                                             ForgotOperation_BirthDate = F"{Birth_Day_Inbox}/{Birth_Month_Inbox}/{Birth_Year_Inbox}"
 
 
-                                            if ForgotOperation_BirthDate == Users_Info['Users'][Inputted_Username]['Birth_Date']:
+                                            if ForgotOperation_BirthDate == Users_Info['Users'][inputted_username]['Birth_Date']:
 
 
                                                 LOOP9 = True
@@ -962,7 +962,7 @@ def Main_Menu():
                                                     if ismasterpassword(ForgotOperation_NewMasterPassword_inbox):
 
 
-                                                        ForgotOperation_NewMasterPassword_inbox = Users_Info['Users'][Inputted_Username]['MasterPassword'] 
+                                                        ForgotOperation_NewMasterPassword_inbox = Users_Info['Users'][inputted_username]['MasterPassword'] 
 
 
                                                         print(F"\33[31m{ForgotOperation_NewMasterPassword_inbox}\33[34m Has been chosen as your \33[31mnew MasterPassword.\33[34m")
@@ -1121,7 +1121,7 @@ def Main_Menu():
                     changeuser_username_Inbox = changeuser_username_Inbox.strip()
 
 
-                    if changeuser_username_Inbox in [user for user in Users_Info["Users"] if changeuser_username_Inbox == user] and changeuser_username_Inbox != Inputted_Username:
+                    if changeuser_username_Inbox in [user for user in Users_Info["Users"] if changeuser_username_Inbox == user] and changeuser_username_Inbox != inputted_username:
 
 
                         clean()
@@ -1149,7 +1149,7 @@ def Main_Menu():
                                 print(F"\33[34m Successfully Logged Into account \33[31m{changeuser_username_Inbox}\33[34m")
 
 
-                                Inputted_Username == changeuser_username_Inbox
+                                inputted_username == changeuser_username_Inbox
 
 
                                 sleep(5)
@@ -1203,7 +1203,7 @@ def Main_Menu():
 
 
 
-                    elif changeuser_username_Inbox == Inputted_Username:
+                    elif changeuser_username_Inbox == inputted_username:
 
 
                         clean()
@@ -1259,7 +1259,7 @@ def Main_Menu():
                     clean()
                     Collect_UserName()
                     collect_MasterPassword()
-                    Collect_BirthDate()
+                    collect_birthdate()
 
 
                     LOOP12 = False
@@ -1336,15 +1336,15 @@ def Main_Menu():
 
 
 
-                    if equality_check(masterpassword_input ,Users_Info["Users"][Inputted_Username]["MasterPassword"]) == True:
+                    if equality_check(masterpassword_input ,Users_Info["Users"][inputted_username]["MasterPassword"]) == True:
 
 
-                        del Users_Info["Users"][Inputted_Username]
+                        del Users_Info["Users"][inputted_username]
 
                         
                         Collect_UserName()
                         collect_MasterPassword()
-                        Collect_BirthDate()
+                        collect_birthdate()
 
 
                         clean()
@@ -1384,7 +1384,7 @@ def Main_Menu():
         # Quitting Operation.
         if User_Desired_Operation in [Number for Number in user_management_operations.keys() if Number == 6]:
 
-            termination()
+            good_bye()
 
 
 
