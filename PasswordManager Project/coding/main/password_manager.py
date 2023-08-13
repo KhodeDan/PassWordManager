@@ -866,7 +866,7 @@ def Main_Menu():
                     continue
 
 
-                if isbirthday(Birth_Day_Inbox):
+                if is_birth_day(Birth_Day_Inbox):
 
 
                     LOOP7 = True
@@ -900,7 +900,7 @@ def Main_Menu():
                             Birth_Month_Inbox = int(Birth_Month_Inbox)
 
 
-                            if isbirthmonth(Birth_Month_Inbox):
+                            if is_birth_month(Birth_Month_Inbox):
 
 
                                 LOOP8 = True

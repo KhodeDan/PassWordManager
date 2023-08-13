@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass , fields
 
 from time import sleep
 
@@ -7,7 +7,7 @@ import sys
 import os
 
 
-current_version = f'Beta 1.7.21'
+current_version = f'1.8.25'
 
 Users_Info = {
     "Users" : {}
@@ -26,7 +26,7 @@ user_management_operations = {
     , 9 : "Delete user"
 }
 
-# Usage in different Input accepting , Denying.
+# Usage in different Input accepting and Denying.
 allowed_character = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" ,"0" , "1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" , "9" , ]
 UpperCase_Letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ,]
 LowerCase_Letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
@@ -153,59 +153,49 @@ def isbirthyear(birthyear : int):
     Age_Last_Limit = 2022
 
 
-    try:
-        if birthyear > Age_Last_Limit:
-            return False
-        
 
-        if birthyear < Age_First_Limit:
-            return False
-        
-
-        return True
-    
-    except:
+    if birthyear > Age_Last_Limit:
         return False
+        
 
+    if birthyear < Age_First_Limit:
+        return False
+        
 
-def isbirthmonth(birthmonth : int):
+    return True
+    
+
+def is_birth_month(birthmonth : int):
 
     birthmonth_First_Limit = 1
     birthmonth_Last_Limit = 12
 
 
+
     if birthmonth > birthmonth_Last_Limit:
         return False
-    
+        
     if birthmonth < birthmonth_First_Limit:
         return False
     
+    return True
+    
+
+def is_birth_day(birthday : int):
+
+    Birthday_First_limit = 1
+    Birthday_Last_limit = 31
+
+
+    if birthday > Birthday_Last_limit:
+        return False
+        
+    if birthday < Birthday_First_limit :
+        return False
+        
 
     return True
-
-
-def isbirthday(birthday : int):
-
-    try:
-
-        Birthday_First_limit = 1
-        Birthday_Last_limit = 31
-
-
-        if birthday > Birthday_Last_limit:
-            return False
-        
-        if birthday < Birthday_First_limit :
-            return False
-        
-
-        return True
     
-    except:
-        
-        return False
-
-
 
 def ismasterpassword(MasterPassword : str):
 
@@ -247,16 +237,12 @@ def ispassword(password):
     password_ending_character_limit = 30 
     Password_Lengh = len(password)   
 
-
-
     if Password_Lengh > password_ending_character_limit:
         return False
     
-
     if Password_Lengh < password_character_limit:
         return False
     
-
     return True
 
 
@@ -288,73 +274,150 @@ def is_yes_or_no(user_input) -> bool:
  
 @dataclass
 class BirthDateDatabase:
-    """The whole birthday calculation databse ( Keeps all the variables )"""
+    """Database of the collect_birthdate function Operation (Keeps all the variables.)"""
 
-    birthdate_add_pass : str = None
-    birth_day : str = None
-    birth_month : str = None
-    birth_year : str = None
-    full_birthday : str = None
+    birthdate_add_or_pass_input : str = None
+    birth_day_input :int = None
+    birth_month_input : int = None
+    birth_year_input : int = None
+    confirm_full_birth_date_input : str = None
 
-    add_pass_answer : bool = False
-    confirm_birthday : str = None
-    confirm_birthmonth : str = None
-    confirm_birthyear : str = None
-    confirm_full_birthdate : str = None
+    accept_to_add_birthdate : bool = False
+    added_birthday : bool = False
+    added_birthmonth : bool = False
+    added_birthyear : bool = False
+    confirmed_full_birthdate : bool = False
 
     add_or_pass_invalid_entry : bool = False
-    
+    input_birth_day_invalid_entry : bool = False
+    input_birth_month_invalid_entry : bool = False
+    input_birth_year_invalid_entry : bool = False
+    confirm_full_birthdate_invalid_entry : bool = False
 
+    full_birth_date : str = None
+    
+    
 class BirthDateFunctions:
+
 
     @staticmethod
     def add_or_pass_birthdate() -> bool:
         """Ask the User if they want to add their birthday"""
 
         clean()
-
-        BirthDateDatabase.birthdate_add_pass = input(
-            f"{color_blue} Would you like to add A birthday to your account ?(Answer with yes or no only) : ")
-        BirthDateDatabase.birthdate_add_pass = BirthDateDatabase.birthdate_add_pass.lower()
+        BirthDateDatabase.birthdate_add_or_pass_input = input(f"{color_blue} Would you like to add A birthday to your account ?({color_red}Answer with yes or no only{color_blue}) : ")
         
-
-        if not is_yes_or_no(BirthDateDatabase.birthdate_add_pass):
-
-            clean()
-            print(f"{color_red} That Is not a yes or no , Please try again{color_blue}.")
-            sleep(4)
+        if not is_yes_or_no(BirthDateDatabase.birthdate_add_or_pass_input):
             BirthDateDatabase.add_or_pass_invalid_entry = True
             return None
-            
-        if BirthDateDatabase.birthdate_add_pass == "no":
-
-            clean()
-            print(f"{color_red} Diverting to the main menu{color_blue}.")
-            sleep(4)
-            clean()
-            BirthDateDatabase.add_pass_answer = False
+        
+        if BirthDateDatabase.birthdate_add_or_pass_input.lower() == "no":
+            BirthDateDatabase.accept_to_add_birthdate = False
             return None
         
-        if BirthDateDatabase.birthdate_add_pass == "yes":
-
-            clean()
-            print(f"{color_red}Diverting to the birthdate panel...")
-            BirthDateDatabase.add_pass_answer = True
-            return None
-
-    @staticmethod
-    def calculation() -> None:
-        """Calculate the full birthdate of the user"""
-
-        BirthDateDatabase.full_birthday = f"{BirthDateDatabase.birth_day}/{BirthDateDatabase.birth_month}\
-            /{BirthDateDatabase.birth_year}"
-        
-        return BirthDateDatabase.full_birthday
+        BirthDateDatabase.accept_to_add_birthdate = True
     
 
+    @staticmethod
+    def input_birthday() -> bool:
+        """Takes the user birthday"""
 
-class BirthDateFunctionExecution:
+        clean()
 
-    print("Hello world!")
+        BirthDateDatabase.birth_day_input = input(f"Please enter the day you were born({color_red}1 to 31{color_blue}) : ")
 
-BirthDateFunctionExecution()
+        if not BirthDateDatabase.birth_day_input.isdigit():
+            BirthDateDatabase.input_birth_day_invalid_entry = True
+            return None
+        
+        BirthDateDatabase.birth_day_input = int(BirthDateDatabase.birth_day_input)
+
+        if not is_birth_day(BirthDateDatabase.birth_day_input):
+            BirthDateDatabase.input_birth_day_invalid_entry = True
+            return None
+        
+        BirthDateDatabase.added_birthday = True
+    
+
+    @staticmethod
+    def input_birthmonth() -> bool:
+        """Takes the user birthmonth"""
+
+        clean()
+        BirthDateDatabase.birth_month_input = input(f"Please enter the month you were born({color_red}1 to 12{color_blue}) : ")
+
+        if not BirthDateDatabase.birth_month_input.isdigit():
+            BirthDateDatabase.input_birth_month_invalid_entry = True
+            return None
+        
+
+        BirthDateDatabase.birth_month_input = int(BirthDateDatabase.birth_month_input)
+        
+
+        if not is_birth_month(BirthDateDatabase.birth_month_input):
+            BirthDateDatabase.input_birth_month_invalid_entry = True
+            return None
+        
+        BirthDateDatabase.added_birthmonth = True
+
+    
+    @staticmethod
+    def input_birthyear() -> bool :
+        """Takes the user birthyear"""
+
+        clean()
+        BirthDateDatabase.birth_year_input = input(f"Please enter the year you were born({color_red}1923 to 202{color_blue}) : ")
+
+        if not BirthDateDatabase.birth_year_input.isdigit():
+            BirthDateDatabase.input_birth_year_invalid_entry = True
+            return None
+        
+
+        BirthDateDatabase.birth_year_input = int(BirthDateDatabase.birth_year_input)
+        
+
+        if not isbirthyear(BirthDateDatabase.birth_year_input):
+            BirthDateDatabase.input_birth_year_invalid_entry = True
+            return None
+        
+        BirthDateDatabase.added_birthyear = True
+
+
+    @staticmethod
+    def calculate_full_birthdate() -> str:
+        """Calculate the full birthdate of the user"""
+
+        BirthDateDatabase.full_birth_date = f"\
+    {BirthDateDatabase.birth_day_input}/{BirthDateDatabase.birth_month_input}/{BirthDateDatabase.birth_year_input}"
+        
+        
+    @staticmethod
+    def confirm_birthdate() -> bool :
+        """Ask the user if they confirm the birthdate they inputted."""
+
+        clean()
+        BirthDateDatabase.confirm_full_birth_date_input = input(
+f"Do you accept {color_red}{BirthDateDatabase.full_birth_date}{color_blue}\
+As your birthdate ?\({color_red}Answer with yes or no only{color_blue}) : "
+)
+
+        if not is_yes_or_no(BirthDateDatabase.confirm_full_birth_date_input):
+            BirthDateDatabase.confirm_full_birthdate_invalid_entry = True
+            return None
+        
+        if BirthDateDatabase.confirm_full_birth_date_input.lower() == "no":
+            BirthDateDatabase.confirmed_full_birthdate = False
+            return None
+        
+        BirthDateDatabase.confirmed_full_birthdate = True
+
+
+BirthDateFunctions.add_or_pass_birthdate()
+BirthDateFunctions.input_birthday()
+BirthDateFunctions.input_birthmonth()
+BirthDateFunctions.input_birthyear()
+BirthDateFunctions.calculate_full_birthdate()
+BirthDateFunctions.confirm_birthdate()
+
+for field in fields(BirthDateDatabase):
+    print(field.name , getattr(BirthDateDatabase, field.name))
