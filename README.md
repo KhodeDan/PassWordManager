@@ -2,9 +2,9 @@
 
 **This project serves as a personal endeavor for me to enhance my skills and understanding of fundamental Python concepts. It allows me to apply these concepts comprehensively, aiming to achieve a robust and reliable coding structure. The project is pursued independently, with the goal of reaching a satisfactory and dependable outcome.**
 
-# What does the PasswordManager actually do And what are the features? :
-** As the name Is self explanatory , It is a Terminal based passwordmanager , But instead of just focusing on the concept ( dictionaries ) That Was learned and trained during the projct ,
-The Project Contain's Account management , Deleting , Viewing , Adding Password , And a password for the main account Which is refrenced as the MasterPassword in the program core. **
+# What does the PasswordManager actually do And what are the features? 
+**As the name Is self explanatory , It is a Terminal based passwordmanager , But instead of just focusing on the concept ( dictionaries ) That Was learned and trained during the projct 
+The Project Contain's Account management , Deleting , Viewing , Adding Password , And a password for the main account Which is refrenced as the MasterPassword in the program core.**
 
 # Table Of contents : 
 > Git:
