@@ -16,7 +16,7 @@ The Project Contain's Account management , Deleting , Viewing , Adding Password 
 - Algorithms:
     > collect_birthDate function Algorithm : attachments -> algorithms
     > Main project algorithm : attachments -> algorithms
-- Coding :
+- Coding:
     > Main coding file : coding -> main
     > Database : coding -> main -> database
 
