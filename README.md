@@ -10,12 +10,17 @@ The Project Contain's Account management , Deleting , Viewing , Adding Password 
 - Git:
     > README : Repository Page , Main File 
     > License : Repository Page , Main file
+
 - Informations:
   > Functions dictionary : attachments -> additional_info
   > FlowChart creating rules : attachments -> additional_info
+
+  
 - Algorithms:
     > collect_birthDate function Algorithm : attachments -> algorithms
     > Main project algorithm : attachments -> algorithms
+
+    
 - Coding:
     > Main coding file : coding -> main
     > Database : coding -> main -> database
