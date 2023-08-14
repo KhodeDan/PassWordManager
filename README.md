@@ -14,7 +14,7 @@ The Project Contain's Account management , Deleting , Viewing , Adding Password 
   > Functions dictionary : attachments -> additional_info
   > FlowChart creating rules : attachments -> additional_info
 - Algorithms:
-  > Collect_BirthDate function Algorithm : attachments -> algorithms
+  > collect_birthDate function Algorithm : attachments -> algorithms
   > Main project algorithm : attachments -> algorithms
 - Coding :
   > Main coding file : coding -> main
