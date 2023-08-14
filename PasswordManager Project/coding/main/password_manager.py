@@ -270,7 +270,7 @@ def collect_MasterPassword():
             input("\33[34mPress any key to continue.")                
 
 
-def collect_birthdate():
+def collect_birth_date():
     
     ...
 
@@ -1259,7 +1259,7 @@ def Main_Menu():
                     clean()
                     Collect_UserName()
                     collect_MasterPassword()
-                    collect_birthdate()
+                    collect_birth_date()
 
 
                     LOOP12 = False
@@ -1344,7 +1344,7 @@ def Main_Menu():
                         
                         Collect_UserName()
                         collect_MasterPassword()
-                        collect_birthdate()
+                        collect_birth_date()
 
 
                         clean()

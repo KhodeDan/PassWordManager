@@ -7,7 +7,7 @@ import sys
 import os
 
 
-current_version = f'1.8.25'
+current_version = f'1.15.27'
 
 Users_Info = {
     "Users" : {}
@@ -271,7 +271,7 @@ def is_yes_or_no(user_input) -> bool:
     
     return True
 
- 
+
 @dataclass
 class BirthDateDatabase:
     """Database of the collect_birthdate function Operation (Keeps all the variables.)"""
@@ -282,7 +282,7 @@ class BirthDateDatabase:
     birth_year_input : int = None
     confirm_full_birth_date_input : str = None
 
-    accept_to_add_birthdate : bool = False
+    accepted_to_add_birthdate : bool = False
     added_birthday : bool = False
     added_birthmonth : bool = False
     added_birthyear : bool = False
@@ -295,9 +295,75 @@ class BirthDateDatabase:
     confirm_full_birthdate_invalid_entry : bool = False
 
     full_birth_date : str = None
-    
+
+
+    LOOP1 = True
+    LOOP2 = True
+    LOOP3 = True
+    LOOP4 = True
+    LOOP_LAST = True # DO NOT CHANGE THIS VARIABLE NAME.
+
     
 class BirthDateFunctions:
+
+    @staticmethod
+    def restart_birthdate_operation():
+
+        all_birthdate_loops = [variable for variable in dir(BirthDateDatabase) if variable.startswith("LOOP") and not variable.endswith("LAST")]
+
+        for loop_variable in all_birthdate_loops:
+            setattr(BirthDateDatabase , loop_variable , False)
+
+
+    @staticmethod
+    def all_loop_values_true():
+
+        all_birthdate_loops = [variable for variable in dir(BirthDateDatabase) if variable.startswith("LOOP")]
+
+        for loop_variable in all_birthdate_loops:
+            setattr(BirthDateDatabase , loop_variable , True)
+    
+
+    def all_loop_values_false():
+
+        all_birthdate_loops  = [variable for variable in dir(BirthDateDatabase) if variable.startswith("LOOP")]
+
+        for loop_variable in all_birthdate_loops:
+            setattr(BirthDateDatabase , loop_variable , False)
+
+
+    @staticmethod
+    def warning_invalid_entry():
+
+        clean()
+        print(f"{color_red} Invalid entry{color_blue}.")
+        sleep(4)
+        clean()
+    
+
+    @staticmethod
+    def warning_diverting_to_main_menu():
+        
+        clean()
+        print(f"{color_red} Diverting to the main menu{color_blue}...")
+        sleep(4)
+        clean()
+
+
+    @staticmethod
+    def inform_about_birthday():
+        """Inform to the user why The program need their birthdate."""
+
+        clean()
+        print(
+f"{color_blue} This Is the part where you can decide to add your {color_red}birthday{color_blue} to your account."
+)
+        sleep(4)
+        print(
+f"Please note that the birthday Is only used in case you forgot your masterpassword."
+)
+        sleep(5)
+        clean()
 
 
     @staticmethod
@@ -312,10 +378,10 @@ class BirthDateFunctions:
             return None
         
         if BirthDateDatabase.birthdate_add_or_pass_input.lower() == "no":
-            BirthDateDatabase.accept_to_add_birthdate = False
+            BirthDateDatabase.accepted_to_add_birthdate = False
             return None
         
-        BirthDateDatabase.accept_to_add_birthdate = True
+        BirthDateDatabase.accepted_to_add_birthdate = True
     
 
     @staticmethod
@@ -324,7 +390,9 @@ class BirthDateFunctions:
 
         clean()
 
-        BirthDateDatabase.birth_day_input = input(f"Please enter the day you were born({color_red}1 to 31{color_blue}) : ")
+        BirthDateDatabase.birth_day_input = input(
+f"{color_blue}Please enter the day you were born({color_red}1 to 31{color_blue}) : "
+)
 
         if not BirthDateDatabase.birth_day_input.isdigit():
             BirthDateDatabase.input_birth_day_invalid_entry = True
@@ -366,7 +434,7 @@ class BirthDateFunctions:
         """Takes the user birthyear"""
 
         clean()
-        BirthDateDatabase.birth_year_input = input(f"Please enter the year you were born({color_red}1923 to 202{color_blue}) : ")
+        BirthDateDatabase.birth_year_input = input(f"Please enter the year you were born({color_red}1923 to 2022{color_blue}) : ")
 
         if not BirthDateDatabase.birth_year_input.isdigit():
             BirthDateDatabase.input_birth_year_invalid_entry = True
@@ -384,11 +452,11 @@ class BirthDateFunctions:
 
 
     @staticmethod
-    def calculate_full_birthdate() -> str:
+    def evaluate_full_birthdate() -> str:
         """Calculate the full birthdate of the user"""
 
         BirthDateDatabase.full_birth_date = f"\
-    {BirthDateDatabase.birth_day_input}/{BirthDateDatabase.birth_month_input}/{BirthDateDatabase.birth_year_input}"
+ {BirthDateDatabase.birth_day_input}/{BirthDateDatabase.birth_month_input}/{BirthDateDatabase.birth_year_input}"
         
         
     @staticmethod
@@ -397,8 +465,8 @@ class BirthDateFunctions:
 
         clean()
         BirthDateDatabase.confirm_full_birth_date_input = input(
-f"Do you accept {color_red}{BirthDateDatabase.full_birth_date}{color_blue}\
-As your birthdate ?\({color_red}Answer with yes or no only{color_blue}) : "
+f"Do you accept{color_red}{BirthDateDatabase.full_birth_date}{color_blue} As your birthdate ? \
+({color_red}Answer with yes or no only{color_blue}) : "
 )
 
         if not is_yes_or_no(BirthDateDatabase.confirm_full_birth_date_input):
@@ -412,12 +480,91 @@ As your birthdate ?\({color_red}Answer with yes or no only{color_blue}) : "
         BirthDateDatabase.confirmed_full_birthdate = True
 
 
-BirthDateFunctions.add_or_pass_birthdate()
-BirthDateFunctions.input_birthday()
-BirthDateFunctions.input_birthmonth()
-BirthDateFunctions.input_birthyear()
-BirthDateFunctions.calculate_full_birthdate()
-BirthDateFunctions.confirm_birthdate()
+class BirthDateFunctionsControl:
+    
+    @staticmethod
+    def run():
+        """Execute all method's related to birthdate in particular order."""
 
-for field in fields(BirthDateDatabase):
-    print(field.name , getattr(BirthDateDatabase, field.name))
+        BirthDateFunctions.inform_about_birthday()
+
+
+        while BirthDateDatabase.LOOP1 == True:
+
+            clean()
+            BirthDateFunctions.add_or_pass_birthdate()
+
+            if not BirthDateDatabase.accepted_to_add_birthdate and not BirthDateDatabase.add_or_pass_invalid_entry:
+
+                BirthDateFunctions.warning_diverting_to_main_menu()
+                return None
+
+            if BirthDateDatabase.add_or_pass_invalid_entry and not BirthDateDatabase.accepted_to_add_birthdate:
+
+                BirthDateFunctions.warning_invalid_entry()
+                continue
+
+
+            while BirthDateDatabase.LOOP2 == True:
+
+
+                BirthDateFunctions.input_birthday()
+
+                if BirthDateDatabase.input_birth_day_invalid_entry and not BirthDateDatabase.added_birthday:
+                    
+                    BirthDateFunctions.warning_invalid_entry()
+                    continue
+
+
+                while BirthDateDatabase.LOOP3:
+
+
+                    BirthDateFunctions.input_birthmonth()
+
+                    if BirthDateDatabase.input_birth_month_invalid_entry and not BirthDateDatabase.added_birthmonth:
+
+
+                        BirthDateFunctions.warning_invalid_entry()
+                        continue
+
+                    
+                    while BirthDateDatabase.LOOP4:
+
+
+                        BirthDateFunctions.input_birthyear()
+
+
+                        if BirthDateDatabase.input_birth_year_invalid_entry and not BirthDateDatabase.added_birthyear:
+
+
+                            BirthDateFunctions.warning_invalid_entry()
+                            continue
+
+
+                        while BirthDateDatabase.LOOP_LAST:
+
+
+                            BirthDateFunctions.evaluate_full_birthdate()
+                            BirthDateFunctions.confirm_birthdate()
+
+
+                            if BirthDateDatabase.confirm_full_birthdate_invalid_entry and not BirthDateDatabase.confirmed_full_birthdate:
+
+                                BirthDateFunctions.warning_invalid_entry()
+                                continue
+
+                            if not BirthDateDatabase.confirmed_full_birthdate and not BirthDateDatabase.confirm_full_birthdate_invalid_entry:
+
+                                clean()
+                                sleep(1)
+                                BirthDateFunctions.restart_birthdate_operation()
+                                break
+                    
+                            clean()
+                            print("Your birthday has been added to the current account.")
+                            sleep(3)
+                            BirthDateFunctions.warning_diverting_to_main_menu()
+                            BirthDateFunctions.all_loop_values_false()
+
+
+BirthDateFunctionsControl().run()
