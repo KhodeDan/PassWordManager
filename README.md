@@ -6,7 +6,7 @@
 **As the name Is self explanatory , It is a Terminal based password manager , But instead of just focusing on the concept ( dictionaries ) That Was learned and trained during the project ,
 The Project Contain's Account management , Deleting , Viewing , Adding Password , And a password for the main account Which is refrenced as the MasterPassword in the program core.**
 
-# Table Of contents : 
+# Table of contents : 
 - Git:
   > README : Repository Page , Main File 
   > License : Repository Page , Main file
