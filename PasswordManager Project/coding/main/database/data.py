@@ -1,4 +1,4 @@
-from dataclasses import dataclass , fields
+from dataclasses import dataclass
 
 from time import sleep
 
@@ -7,13 +7,20 @@ import sys
 import os
 
 
-current_version = f'1.15.27'
+current_version = f'2.19.27'
 
 Users_Info = {
     "Users" : {}
 }
 
-Operations = {  1 : "Viewing Passwords"
+class UserName:
+
+    def __init__(self , inputted_username):
+
+        self.inputted_username = inputted_username
+
+
+operations = {  1 : "Viewing Passwords"
               , 2 : "Adding Password" 
               , 3 : "Removing Password" 
               , 4 : "Changing MasterPassword"
@@ -30,7 +37,7 @@ user_management_operations = {
 allowed_character = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" ,"0" , "1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" , "9" , ]
 UpperCase_Letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" ,]
 LowerCase_Letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-Numbers = ["1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" , "9" , "0"]
+numbers = ["1" , "2" , "3" , "4" , "5" , "6" , "7" , "8" , "9" , "0"]
 
 QUIT_LETTERCASE = [
     "QUIT",
@@ -63,11 +70,6 @@ color_blue = "\33[34m"
 bold = "\33[1m" 
 format_reversed = "\33[7m"
 format_reset = "\33[0m"
-
-
-def quit() -> None:
-    """Terminate a function or the main program"""
-    sys.exit()
 
 
 def clean() -> None:
@@ -109,14 +111,14 @@ def good_bye():
             """Exit the program with goodbye message."""
 
             clean()
-            print("\33[ Thanks for Using KhodeDan's Password Manager.")
+            print(f"{color_blue} Thanks for Using KhodeDan's Password Manager.")
             sleep(4)
             clean()
             print("\33[1;31;40mQuitting.... \33[0m")
             sleep(3)
             clean()
 
-            quit()
+            sys.exit()
 
 
 def isusername(UserName : str):
@@ -210,7 +212,7 @@ def ismasterpassword(MasterPassword : str):
 
     for character in MasterPassword:
         
-        if character in Numbers:
+        if character in numbers:
             HasNumber = True
             point = point - 1
 
@@ -255,12 +257,12 @@ def equality_check(arg1 : str , arg2 : str) -> bool:
     return False
 
 
-def get_key_by_value(dictionary : dict , value):
+def get_key_by_value(dictionary : dict , inputted_value):
     """return the key of dictionary by providing its value"""
     
     for key,value in dictionary.items():
         
-        if key == value:
+        if value == inputted_value:
             return key
 
 
@@ -296,20 +298,35 @@ class BirthDateDatabase:
 
     full_birth_date : str = None
 
-
-    LOOP1 = True
+    STARTING_LOOP = True
     LOOP2 = True
     LOOP3 = True
     LOOP4 = True
-    LOOP_LAST = True # DO NOT CHANGE THIS VARIABLE NAME.
+    ENDING_LOOP = True 
 
-    
+
 class BirthDateFunctions:
+
+    @staticmethod
+    def reset_all_birth_operation_variables():
+        """Reset all the variables inside the BirthDateDatabase class ( Excluding the loops )"""
+
+        all_birthdate_variables = [
+            variable for variable in dir(BirthDateDatabase) if not variable.__contains__("LOOP")
+            and not variable.startswith("__") and not variable.endswith("__")
+        ]
+
+        for variable in all_birthdate_variables:
+            setattr(BirthDateDatabase , variable , None)
+
 
     @staticmethod
     def restart_birthdate_operation():
 
-        all_birthdate_loops = [variable for variable in dir(BirthDateDatabase) if variable.startswith("LOOP") and not variable.endswith("LAST")]
+        all_birthdate_loops = [
+            variable for variable in dir(BirthDateDatabase) 
+            if variable.__contains__("LOOP") and not variable.__contains__("STARTING")
+            ]
 
         for loop_variable in all_birthdate_loops:
             setattr(BirthDateDatabase , loop_variable , False)
@@ -318,7 +335,9 @@ class BirthDateFunctions:
     @staticmethod
     def all_loop_values_true():
 
-        all_birthdate_loops = [variable for variable in dir(BirthDateDatabase) if variable.startswith("LOOP")]
+        all_birthdate_loops = [
+            variable for variable in dir(BirthDateDatabase) if variable.__contains__("LOOP")
+            ]
 
         for loop_variable in all_birthdate_loops:
             setattr(BirthDateDatabase , loop_variable , True)
@@ -326,7 +345,10 @@ class BirthDateFunctions:
 
     def all_loop_values_false():
 
-        all_birthdate_loops  = [variable for variable in dir(BirthDateDatabase) if variable.startswith("LOOP")]
+        all_birthdate_loops  = [
+            variable for variable in dir(BirthDateDatabase) if variable.startswith("LOOP")
+            or variable.endswith("LOOP")
+            ]
 
         for loop_variable in all_birthdate_loops:
             setattr(BirthDateDatabase , loop_variable , False)
@@ -348,6 +370,13 @@ class BirthDateFunctions:
         print(f"{color_red} Diverting to the main menu{color_blue}...")
         sleep(4)
         clean()
+    
+
+    def warning_birthdate_added_to_account():
+
+        print("Your birthday has been added to your current account.")
+        sleep(3)
+        BirthDateFunctions.warning_diverting_to_main_menu()
 
 
     @staticmethod
@@ -489,15 +518,17 @@ class BirthDateFunctionsControl:
         BirthDateFunctions.inform_about_birthday()
 
 
-        while BirthDateDatabase.LOOP1 == True:
+        while BirthDateDatabase.STARTING_LOOP == True:
 
             clean()
+            BirthDateFunctions.all_loop_values_true()
+            BirthDateFunctions.reset_all_birth_operation_variables()
             BirthDateFunctions.add_or_pass_birthdate()
 
             if not BirthDateDatabase.accepted_to_add_birthdate and not BirthDateDatabase.add_or_pass_invalid_entry:
 
                 BirthDateFunctions.warning_diverting_to_main_menu()
-                return None
+                BirthDateFunctions.all_loop_values_false()
 
             if BirthDateDatabase.add_or_pass_invalid_entry and not BirthDateDatabase.accepted_to_add_birthdate:
 
@@ -516,7 +547,7 @@ class BirthDateFunctionsControl:
                     continue
 
 
-                while BirthDateDatabase.LOOP3:
+                while BirthDateDatabase.LOOP3 == True:
 
 
                     BirthDateFunctions.input_birthmonth()
@@ -528,7 +559,7 @@ class BirthDateFunctionsControl:
                         continue
 
                     
-                    while BirthDateDatabase.LOOP4:
+                    while BirthDateDatabase.LOOP4 == True:
 
 
                         BirthDateFunctions.input_birthyear()
@@ -541,7 +572,7 @@ class BirthDateFunctionsControl:
                             continue
 
 
-                        while BirthDateDatabase.LOOP_LAST:
+                        while BirthDateDatabase.ENDING_LOOP == True:
 
 
                             BirthDateFunctions.evaluate_full_birthdate()
@@ -561,10 +592,6 @@ class BirthDateFunctionsControl:
                                 break
                     
                             clean()
-                            print("Your birthday has been added to the current account.")
-                            sleep(3)
-                            BirthDateFunctions.warning_diverting_to_main_menu()
+                            BirthDateFunctions.warning_birthdate_added_to_account
+                            sleep(4)
                             BirthDateFunctions.all_loop_values_false()
-
-
-BirthDateFunctionsControl().run()
