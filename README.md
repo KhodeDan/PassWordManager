@@ -1,6 +1,6 @@
 # What Is PasswordManager project?
 
-**This project serves as a personal endeavor for me to enhance my skills and understanding of fundamental Python concepts. It allows me to apply these concepts comprehensively, aiming to achieve a robust and reliable coding structure. The project is pursued independently, with the goal of reaching a satisfactory and dependable outcome.**
+**This project serves as a personal endeavor for me to enhance my skills and understanding of fundamental Python concepts. It allows me to apply these concepts comprehensively, aiming to achieve a robust and reliable coding structure. The project is pursued independently with the goal of reaching a satisfactory and dependable outcome.**
 
 # What does the PasswordManager actually do And what are the features? 
 **It is a Terminal based password manager , But instead of just focusing on the concept ( dictionaries ) That Was learned and trained during the project ,
