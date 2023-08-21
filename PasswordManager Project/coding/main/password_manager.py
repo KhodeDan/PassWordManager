@@ -6,7 +6,7 @@ def starting():
 
     clean()
     loading()
-    print(F"Welcome to KhodeDan Password Manager version : \33[31m{current_version}\33[34m")
+    print(F"Welcome to KhodeNima's Password Manager version : \33[31m{current_version}\33[34m")
     sleep(4)
 
 
@@ -20,7 +20,7 @@ def Collect_UserName():
     "-----------------------------------------------"
 
 
-    clean()  # Clean Is a replacement function for os.system('cls')
+    clean()
 
 
     sleep(4)
