@@ -7,7 +7,7 @@ import sys
 import os
 
 
-current_version = f'2.19.27'
+current_version = f'2.19.29'
 
 Users_Info = {
     "Users" : {}
