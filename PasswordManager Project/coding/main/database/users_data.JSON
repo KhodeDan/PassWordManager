@@ -1,0 +1,24 @@
+{
+    "Users": {
+        "KhodeDan": {
+            "MasterPassword": "RedWolf1388",
+            "PassWords": {},
+            "Birth_Date": null
+        },
+        "KhodeAmir": {
+            "MasterPassword": "RedWolf1388",
+            "PassWords": {},
+            "Birth_Date": null
+        },
+        "KhodeReza": {
+            "MasterPassword": "KhodeReza1",
+            "PassWords": {},
+            "Birth_Date": null
+        },
+        "Gate": {
+            "MasterPassword": "Gateam23",
+            "PassWords": {},
+            "Birth_Date": " 1/1/1923"
+        }
+    }
+}
