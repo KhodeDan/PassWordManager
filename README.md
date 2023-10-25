@@ -1,6 +1,6 @@
 # What Is NyvoJax PasswordManager project?
 
-**This project serves as a personal endeavor for me to enhance my skills and understanding of fundamental Python concepts. It allows me to apply these concepts comprehensively, aiming to achieve a robust and reliable coding structure. The project is pursued independently with the goal of reaching a satisfactory and dependable outcome.**
+**NyvoJax is a Linux-based password manager that aims to improve the security and convenience of storing passwords in the Linux operating system. Storing passwords can be a frustrating and time-consuming task, and with NyvoJax, you can rest assured that your credentials are protected. NyvoJax makes managing passwords easy and hassle-free, allowing you to log in to your accounts quickly and securely. With regular updates and support, NyvoJax is a reliable tool for password management in Linux**
 
 # What does the PasswordManager actually do And what are the features? 
 **It is a Terminal based password manager , But instead of just focusing on the concept ( dictionaries ) That Was learned and trained during the project ,
