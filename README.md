@@ -28,9 +28,3 @@ The Project Contain's Account management , Deleting , Viewing , Adding Password 
     > Main coding file : coding -> main
     
     > Database : coding -> main -> database
-
-
-
-# Note:
-
-[!NOTE] > 
