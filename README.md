@@ -1,4 +1,4 @@
-# What Is PasswordManager project?
+# What Is NyvoJax PasswordManager project?
 
 **This project serves as a personal endeavor for me to enhance my skills and understanding of fundamental Python concepts. It allows me to apply these concepts comprehensively, aiming to achieve a robust and reliable coding structure. The project is pursued independently with the goal of reaching a satisfactory and dependable outcome.**
 
