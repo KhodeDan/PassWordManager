@@ -5,7 +5,7 @@ import json
 import sys
 import os
 
-__version__ = "3.24.34"
+__version__ = "3.26.35"
 
 
 def load_from_json():
@@ -216,15 +216,14 @@ def loading_screen() -> None:
 
     while bytes_downloaded <= download_limit:
         clean()
-        loading_logo.append(loading_character)
+        loading_logo += loading_character
 
-        for byte in loading_logo:
-            string_loading_logo = "".join(loading_logo)
+        string_loading_logo = ''.join(loading_logo)
 
         print(
             f"{color_blue}{bytes_downloaded} : {color_green}{string_loading_logo}{color_blue}"
         )
-        bytes_downloaded += 1
+        bytes_downloaded += 2
 
 
 def good_bye():
