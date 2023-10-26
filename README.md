@@ -8,8 +8,8 @@
 
 # What does the PasswordManager actually do And what are the features? 
 ---
-> **It is a Terminal based password manager , But instead of just focusing on the concept ( dictionaries ) That Was learned and trained during the project ,
-> The Project Contain's Account management , Deleting , Viewing , Adding Password , And a password for the main account Which is refrenced as the MasterPassword in the program core.**
+> **The present program is a password management system based on the terminal interface. Whereas traditional password managers only focus on core functions, this project incorporates additional features, such
+> as account management, password editing and deletion, viewing and adding of passwords, and a password for the primary account commonly known as the MasterPassword within the program code.**
 ---
 <br>
 
