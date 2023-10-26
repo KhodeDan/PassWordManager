@@ -2,6 +2,9 @@
 # -*- coding: utf-8 -*-
 
 from database.data import *
+from database.data import (
+    __version__
+)
 
 
 def greet():
