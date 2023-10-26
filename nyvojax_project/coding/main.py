@@ -13,7 +13,7 @@ def greet():
     clean()
     loading()
     print(
-        f"Welcome to NyvoJax Password Manager version : \33[31m{current_version}\33[34m"
+        f"Welcome to NyvoJax Password Manager version : \33[31m{__version__}\33[34m"
     )
     sleep(4)
 
