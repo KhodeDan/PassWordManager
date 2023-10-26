@@ -10,7 +10,7 @@ def greet():
 
     clean()
     clean()
-    print(f"Welcome to NyvoJax password manager version : \33[31m{__version__}\33[34m")
+    print(f"Welcome to NyvoJax password manager version : {color_red}{__version__}{color_blue}.")
     sleep(4)
 
 
@@ -46,7 +46,7 @@ def collect_username():
             while LOOP2:
                 clean()
 
-                if LOOP2 == False:
+                if not LOOP2:
                     break
 
                 username_confirmation = input(
@@ -222,6 +222,11 @@ def collect_birth_date():
     BirthDateFunctions.reset_all_birth_operation_variables()
     dump_to_json()
 
+
+def sign_in():
+    collect_username()
+    collect_masterpassword()
+    collect_birth_date()
 
 def main_menu():
     LOOP1 = True
@@ -1107,7 +1112,7 @@ def main_menu():
                     else:
                         clean()
 
-                        print("\33[31m Access Denied.")
+                        print(f"{color_red} Access Denied{color_blue}.")
                         sleep(4)
 
                         LOOP13 = False
@@ -1128,9 +1133,10 @@ def main_menu():
 
 
 def main():
-    UserName.inputted_username = "KhodeNima"
+    loading_screen()
+    greet()
+    sign_in()
     main_menu()
-
 
 if __name__ == "__main__":
     main()
