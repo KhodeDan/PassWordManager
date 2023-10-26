@@ -5,7 +5,7 @@ import json
 import sys
 import os
 
-__version__ = "3.23.21"
+__version__ = "3.24.34"
 
 
 def load_from_json():
@@ -19,7 +19,7 @@ users_info = load_from_json()
 
 
 def dump_to_json():
-    with open("coding/main/database/users_data.JSON", "w") as users_data:
+    with open(r"coding/database/users_data.JSON", "w") as users_data:
         json.dump(users_info, users_data, indent=4)
 
 
@@ -33,7 +33,7 @@ operations = {
     2: "Adding Password",
     3: "Removing Password",
     4: "Changing MasterPassword",
-    5: "ForGot MasterPassword",
+    5: "Forgot MasterPassword",
     6: "Quit",
 }
 
@@ -190,9 +190,11 @@ TABS = "\t"
 
 color_red = "\33[31m"
 color_blue = "\33[34m"
+color_green = "\33[32m"
 bold = "\33[1m"
 format_reversed = "\33[7m"
 format_reset = "\33[0m"
+format_character = chr(9480) * 55
 
 
 def clean() -> None:
@@ -204,32 +206,25 @@ def clean() -> None:
         os.system("clear")
 
 
-def loading():
-    print(f"{color_blue}Loading{color_red} Assets....")
-    sleep(1)
-    clean()
-    print(f"{color_blue}Loading{color_red} Assets...")
-    sleep(1)
-    clean()
-    print(f"{color_blue}Loading{color_red} Assets..")
-    sleep(1)
-    clean()
-    print(f"{color_blue}Loading{color_red} Attachments....")
-    sleep(1)
-    clean()
-    print(f"{color_blue}Loading{color_red} Attachments...")
-    sleep(1)
-    clean()
-    print(f"{color_blue}Loading{color_red} Attachments..")
-    sleep(1)
-    clean()
-    print(f"{color_blue}Loading{color_red} Attachments.")
-    sleep(1)
-    clean()
-    print(f"{color_red}Loading{color_blue} Done.")
-    sleep(1)
+def loading_screen() -> None:
+    """Simulates a loding screen operation"""
 
-    clean()
+    loading_character = chr(9609)
+    loading_logo = list(loading_character)
+    download_limit = 100
+    bytes_downloaded = 0
+
+    while bytes_downloaded <= download_limit:
+        clean()
+        loading_logo.append(loading_character)
+
+        for byte in loading_logo:
+            string_loading_logo = "".join(loading_logo)
+
+        print(
+            f"{color_blue}{bytes_downloaded} : {color_green}{string_loading_logo}{color_blue}"
+        )
+        bytes_downloaded += 1
 
 
 def good_bye():
@@ -336,14 +331,10 @@ def ismasterpassword(MasterPassword: str):
         and HasLowerCase == True
         and HasUpperCase == True
     ):
-        print(point)
         return True
 
     else:
         return False
-
-
-print(ismasterpassword(""))
 
 
 def ispassword(password):
@@ -418,7 +409,7 @@ class BirthDateDatabase:
 class BirthDateFunctions:
     @staticmethod
     def reset_all_birth_operation_variables():
-        """Reset all the variables inside the BirthDateDatabase class ( Excluding the loops )"""
+        """Resets all the variables inside the BirthDateDatabase class ( Excluding the loops )"""
 
         all_birthdate_variables = [
             variable
@@ -486,16 +477,16 @@ class BirthDateFunctions:
         BirthDateFunctions.warning_diverting_to_main_menu()
 
     @staticmethod
-    def inform_about_birthday():
+    def inform_birthdate_usage():
         """Inform to the user why The program need their birthdate."""
 
         clean()
         print(
-            f"{color_blue} This Is the part where you can decide to add your {color_red}birthday{color_blue} to your account."
+            f"{color_blue} This is the part where you can decide to add your {color_red}birthdate{color_blue} to your account."
         )
         sleep(4)
         print(
-            f"Please note that the birthday Is only used in case you forgot your masterpassword."
+            f"Please note that the birthday is only used in the {color_red}masterpassword recovery operation{color_blue}."
         )
         sleep(5)
         clean()
@@ -506,7 +497,7 @@ class BirthDateFunctions:
 
         clean()
         BirthDateDatabase.birthdate_add_or_pass_input = input(
-            f"{color_blue} Would you like to add A birthday to your account ?({color_red}Answer with yes or no only{color_blue}) : "
+            f"{color_blue} Would you like to add a birthdate to your account ? ( {color_red}Answer with yes or no only{color_blue} ) : "
         )
 
         if not is_yes_or_no(BirthDateDatabase.birthdate_add_or_pass_input):
@@ -589,7 +580,7 @@ class BirthDateFunctions:
         """Calculate the full birthdate of the user"""
 
         BirthDateDatabase.full_birth_date = f"\
- {BirthDateDatabase.birth_day_input}/{BirthDateDatabase.birth_month_input}/{BirthDateDatabase.birth_year_input}"
+{BirthDateDatabase.birth_day_input}/{BirthDateDatabase.birth_month_input}/{BirthDateDatabase.birth_year_input}"
 
     @staticmethod
     def confirm_birthdate() -> bool:
@@ -597,8 +588,8 @@ class BirthDateFunctions:
 
         clean()
         BirthDateDatabase.confirm_full_birth_date_input = input(
-            f"Do you accept{color_red}{BirthDateDatabase.full_birth_date}{color_blue} As your birthdate ? \
-({color_red}Answer with yes or no only{color_blue}) : "
+            f"Do you accept {color_red}{BirthDateDatabase.full_birth_date}{color_blue} As your birthdate ? \
+( {color_red}Answer with yes or no only{color_blue} ) : "
         )
 
         if not is_yes_or_no(BirthDateDatabase.confirm_full_birth_date_input):
@@ -617,7 +608,7 @@ class BirthDateFunctionsControl:
     def run():
         """Execute all method's related to birthdate in particular order."""
 
-        BirthDateFunctions.inform_about_birthday()
+        BirthDateFunctions.inform_birthdate_usage()
 
         while BirthDateDatabase.STARTING_LOOP == True:
             clean()
@@ -639,7 +630,7 @@ class BirthDateFunctionsControl:
                 BirthDateFunctions.warning_invalid_entry()
                 continue
 
-            while BirthDateDatabase.LOOP2 == True:
+            while BirthDateDatabase.LOOP2:
                 BirthDateFunctions.input_birthday()
 
                 if (
@@ -690,6 +681,6 @@ class BirthDateFunctionsControl:
                                 break
 
                             clean()
-                            BirthDateFunctions.warning_birthdate_added_to_account
+                            BirthDateFunctions.warning_birthdate_added_to_account()
                             sleep(4)
                             BirthDateFunctions.all_loop_values_false()
