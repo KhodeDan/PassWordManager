@@ -5,7 +5,7 @@ import json
 import sys
 import os
 
-current_version = f"3.21.29"
+current_version = "3.23.21"
 
 
 def load_from_json():
