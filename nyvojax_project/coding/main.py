@@ -244,6 +244,13 @@ def sign_in():
 
 
 def main_menu():
+    """# The programs main menu
+    ---
+    - WARNING : Must be logged-in to use.
+    """
+    dump_to_database()
+    load_from_database()
+
     LOOP1 = True
     LOOP2 = True
     LOOP3 = True
