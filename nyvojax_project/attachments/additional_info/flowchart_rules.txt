@@ -1,17 +1,5 @@
-FlowChart rules :
+Flowchart conventions:
 
-	Loop starting , Finishing , Change In operation's will be written In sqaure.
-	Normal logical activites will be written In circle ( Not classes , Function's , Decorators )
-	User Input's are shown in Hexagon shape.
-	System Decisions will be written In rhombuse.
-	Functions Will be written in triangles.
-	Function Calls be written In Call Activity Shape ( Yellow Square ).
-	Connected attribute's will be written In Page refrences.
-	Database and class connection's will be written In Database Shape.
-	Connection's will be Refrenced With circlehead Lines.
-	Import's and accesse's will be Refrenced With Arrowhead Lines.
-	Partition's will be shown In vertical Lines.
-	Partition Name's will be shown in Horizontal Lane.
-	Comment's will be sown In Comment_Alt shape.
-	Ordering's Will be Written In brackets ( Number ) .
-	
+    1. This project and its entire branches, repositories and pull requests are labled under and/or belongs to NyvoStudio™, 
+        - And the mass of developers and engineers contributing to this project, must adhere to the NyvoStudio designing algorithm style:
+        - ( https://github.com/NyvoStudio/StyleGuide/tree/Main.project/styling_guide/designing_algorithm_style )
