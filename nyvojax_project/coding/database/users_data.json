@@ -1,6 +1,13 @@
 {
     "users": {
+        "KhodeNima": {
+            "PassWords": {
+                "discordpass": "Somepass0"
+            },
+            "MasterPassword" : "Somepass1",
+            "Birth_Date" : "1/1/1923",
+            "is_logged_in" : false
 
-        
+        }
     }
 }
