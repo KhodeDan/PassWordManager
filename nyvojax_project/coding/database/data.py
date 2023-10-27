@@ -1,3 +1,13 @@
+"""
+---
+# The NyvoJax password manager data file
+--- 
+
+- Raises:
+    - PermissionError: If the file is runned direcly | ( Only importing usage is allowed for this file. )
+
+---
+"""
 from dataclasses import dataclass
 from time import sleep
 import platform
@@ -5,25 +15,37 @@ import json
 import sys
 import os
 
-__version__ = "3.26.35"
+__version__ = "4.0.0"
 
 
-def load_from_json():
-    with open(r"coding/database/users_data.JSON", "r") as users:
-        data = json.load(users)
+def load_from_database() -> dict:
+    """Loads the users data from the JSON database
+
+    Returns:
+        dict: The database dictionary
+    """
+    with open(r"coding/database/users_data.JSON", "r") as users_data:
+        data = json.load(users_data)
 
     return data
 
 
-users_info = load_from_json()
+users_info = load_from_database()
 
 
-def dump_to_json():
+def dump_to_database() -> bool:
+    """Dumps the modified ( or stated ) users data dictionary to the JSON database.
+
+    Returns: 
+       bool: True
+    """
     with open(r"coding/database/users_data.JSON", "w") as users_data:
         json.dump(users_info, users_data, indent=4)
 
+    return True
 
-class UserName:
+
+class Username:
     def __init__(self, inputted_username):
         self.inputted_username = inputted_username
 
@@ -39,8 +61,7 @@ operations = {
 
 user_management_operations = {7: "Change User", 8: "Add User", 9: "Delete user"}
 
-
-allowed_character = [
+ascii_allowed_characters = [
     "A",
     "B",
     "C",
@@ -104,7 +125,7 @@ allowed_character = [
     "8",
     "9",
 ]
-uppercase_letters = [
+ascii_uppercase_letters = [
     "A",
     "B",
     "C",
@@ -132,7 +153,7 @@ uppercase_letters = [
     "Y",
     "Z",
 ]
-lowercase_letters = [
+ascii_lowercase_letters = [
     "a",
     "b",
     "c",
@@ -160,9 +181,9 @@ lowercase_letters = [
     "y",
     "z",
 ]
-numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+ascii_numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
 
-QUIT_LETTERCASE = [
+VALID_QUIT_VALUES = [
     "QUIT",
     "Quit",
     "quit",
@@ -186,11 +207,11 @@ QUIT_LETTERCASE = [
     "quIt",
 ]
 
-TABS = "\t"
+TAB = "\t"
 
-color_red = "\33[31m"
-color_blue = "\33[34m"
-color_green = "\33[32m"
+COLOR_RED = "\33[31m"
+COLOR_BLUE = "\33[34m"
+COLOR_GREEN = "\33[32m"
 bold = "\33[1m"
 format_reversed = "\33[7m"
 format_reset = "\33[0m"
@@ -221,21 +242,26 @@ def loading_screen() -> None:
         string_loading_logo = ''.join(loading_logo)
 
         print(
-            f"{color_blue}{bytes_downloaded} : {color_green}{string_loading_logo}{color_blue}"
+            f"{COLOR_BLUE}{bytes_downloaded} : {COLOR_GREEN}{string_loading_logo}{COLOR_BLUE}"
         )
         bytes_downloaded += 2
 
 
-def good_bye():
+def farewell_user():
     """Exit the program with goodbye message."""
 
     clean()
-    print(f"{color_blue} Thanks for Using NyvoJax Password Manager.")
+    print(f"{COLOR_BLUE} Thanks for Using NyvoJax password manager.")
     sleep(4)
     clean()
     print("\33[1;31;40mQuitting.... \33[0m")
     sleep(3)
     clean()
+
+
+def close_safely():
+    """Close the application in a safe manner.
+    """
 
     sys.exit()
 
@@ -255,7 +281,7 @@ def isusername(UserName: str):
         return False
 
     for character in UserName:
-        if character not in allowed_character:
+        if character not in ascii_allowed_characters:
             return False
 
     return True
@@ -310,15 +336,15 @@ def ismasterpassword(MasterPassword: str):
     MasterPasswordLenght = len(MasterPassword)
 
     for character in MasterPassword:
-        if character in numbers:
+        if character in ascii_numbers:
             HasNumber = True
             point = point - 1
 
-        elif character in uppercase_letters:
+        elif character in ascii_uppercase_letters:
             HasUpperCase = True
             point = point - 1
 
-        elif character in lowercase_letters:
+        elif character in ascii_lowercase_letters:
             HasLowerCase = True
             point = point - 1
 
@@ -457,14 +483,14 @@ class BirthDateFunctions:
     @staticmethod
     def warning_invalid_entry():
         clean()
-        print(f"{color_red} Invalid entry{color_blue}.")
+        print(f"{COLOR_RED} Invalid entry{COLOR_BLUE}.")
         sleep(4)
         clean()
 
     @staticmethod
     def warning_diverting_to_main_menu():
         clean()
-        print(f"{color_red} Diverting to the main menu{color_blue}...")
+        print(f"{COLOR_RED} Diverting to the main menu{COLOR_BLUE}...")
         sleep(4)
         clean()
 
@@ -481,11 +507,11 @@ class BirthDateFunctions:
 
         clean()
         print(
-            f"{color_blue} This is the part where you can decide to add your {color_red}birthdate{color_blue} to your account."
+            f"{COLOR_BLUE} This is the part where you can decide to add your {COLOR_RED}birthdate{COLOR_BLUE} to your account."
         )
         sleep(4)
         print(
-            f"Please note that the birthday is only used in the {color_red}masterpassword recovery operation{color_blue}."
+            f"Please note that the birthday is only used in the {COLOR_RED}masterpassword recovery operation{COLOR_BLUE}."
         )
         sleep(5)
         clean()
@@ -496,7 +522,7 @@ class BirthDateFunctions:
 
         clean()
         BirthDateDatabase.birthdate_add_or_pass_input = input(
-            f"{color_blue} Would you like to add a birthdate to your account ? ( {color_red}Answer with yes or no only{color_blue} ) : "
+            f"{COLOR_BLUE} Would you like to add a birthdate to your account ? ( {COLOR_RED}Answer with yes or no only{COLOR_BLUE} ) : "
         )
 
         if not is_yes_or_no(BirthDateDatabase.birthdate_add_or_pass_input):
@@ -517,7 +543,7 @@ class BirthDateFunctions:
         clean()
 
         BirthDateDatabase.birth_day_input = input(
-            f"{color_blue}Please enter the day you were born({color_red}1 to 31{color_blue}) : "
+            f"{COLOR_BLUE}Please enter the day you were born({COLOR_RED}1 to 31{COLOR_BLUE}) : "
         )
 
         if not BirthDateDatabase.birth_day_input.isdigit():
@@ -538,7 +564,7 @@ class BirthDateFunctions:
 
         clean()
         BirthDateDatabase.birth_month_input = input(
-            f"Please enter the month you were born({color_red}1 to 12{color_blue}) : "
+            f"Please enter the month you were born({COLOR_RED}1 to 12{COLOR_BLUE}) : "
         )
 
         if not BirthDateDatabase.birth_month_input.isdigit():
@@ -559,7 +585,7 @@ class BirthDateFunctions:
 
         clean()
         BirthDateDatabase.birth_year_input = input(
-            f"Please enter the year you were born({color_red}1923 to 2022{color_blue}) : "
+            f"Please enter the year you were born({COLOR_RED}1923 to 2022{COLOR_BLUE}) : "
         )
 
         if not BirthDateDatabase.birth_year_input.isdigit():
@@ -587,8 +613,8 @@ class BirthDateFunctions:
 
         clean()
         BirthDateDatabase.confirm_full_birth_date_input = input(
-            f"Do you accept {color_red}{BirthDateDatabase.full_birth_date}{color_blue} As your birthdate ? \
-( {color_red}Answer with yes or no only{color_blue} ) : "
+            f"Do you accept {COLOR_RED}{BirthDateDatabase.full_birth_date}{COLOR_BLUE} As your birthdate ? \
+( {COLOR_RED}Answer with yes or no only{COLOR_BLUE} ) : "
         )
 
         if not is_yes_or_no(BirthDateDatabase.confirm_full_birth_date_input):
@@ -683,3 +709,7 @@ class BirthDateFunctionsControl:
                             BirthDateFunctions.warning_birthdate_added_to_account()
                             sleep(4)
                             BirthDateFunctions.all_loop_values_false()
+
+
+if __name__ == '__main__':
+    raise PermissionError("The data file cannot run direcly | ( Only import usage allowed) ")
