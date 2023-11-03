@@ -1,7 +1,7 @@
 # What Is NyvoJax PasswordManager project?
 ---
 > **NyvoJax is a Linux-based password manager that aims to improve the security and convenience of storing passwords in the Linux operating system. Storing passwords can be a frustrating and time-consuming task,  and with NyvoJax, you can rest assured that your credentials are protected. NyvoJax makes managing passwords easy and hassle-free, allowing you to log in to your accounts quickly and securely. With regular
->  updates and support, NyvoJax is a reliable tool for password management in Linux**
+>  updates and support, NyvoJax is a reliable tool for password management in Linux.**
 ---
 <br>
 
