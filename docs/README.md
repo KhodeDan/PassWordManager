@@ -25,13 +25,22 @@
 > - Informations:
   
     Flowchart stylying guide: attachments -> additional_info
-
   
 > - Algorithms:
 
     collect_birthdate function algorithm: attachments -> algorithms
     
     Main project algorithm: attachments -> algorithms
+
+> - Feature files:
+
+    sign-in panel: attachments -> features
+
+> - Pictures:
+
+    Main project icon: attachments -> pictures
+
+    
     
 > - Coding:
 
