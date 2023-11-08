@@ -18,28 +18,26 @@
 ---
 > - Git:
 
-    README : Repository Page , Main File
+    README: Repository Page , Main File
     
-    License : Repository Page , Main file
+    License: Repository Page , Main file
 
 > - Informations:
-
-    Functions dictionary : attachments -> additional_info
   
-    Flowchart creating rules : attachments -> additional_info
+    Flowchart stylying guide: attachments -> additional_info
 
   
 > - Algorithms:
 
-    collect_birthdate function algorithm : attachments -> algorithms
+    collect_birthdate function algorithm: attachments -> algorithms
     
-    Main project algorithm : attachments -> algorithms
+    Main project algorithm: attachments -> algorithms
     
 > - Coding:
 
-    Main coding file : coding -> main
+    Main coding file: coding -> main
     
-    Database : coding -> main -> database
+    Database: coding -> main -> database
 
 ---
 <br>
