@@ -40,13 +40,19 @@
 
     Main project icon: attachments -> pictures
 
-    
-    
+        
 > - Coding:
 
     Main coding file: coding -> main
-    
     Database: coding -> main -> database
 
+---
+<br>
+
+
+## Note
+---
+> [!NOTE]
+> *This repository is archived until further development*.
 ---
 <br>
