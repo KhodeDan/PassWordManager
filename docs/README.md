@@ -50,9 +50,9 @@
 <br>
 
 
-## Note
+# Note:
 ---
 > [!NOTE]
-> *This repository is archived until further development**.
+> ***This repository is archived until further development***.
 ---
 <br>
