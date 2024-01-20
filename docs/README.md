@@ -48,11 +48,3 @@
 
 ---
 <br>
-
-
-## Note
----
-> [!NOTE]
-> *This repository is archived until further development*.
----
-<br>
